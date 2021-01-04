@@ -4,8 +4,12 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import ElementUI from 'element-ui'
+import Navbar from '@/components/navbar'
+import SideBar from '@/components/sidebar'
 import 'element-ui/lib/theme-chalk/index.css'
 
+Vue.component('v-navbar',Navbar)
+Vue.component('v-side',SideBar)
 Vue.use(ElementUI)
 
 //axios 配置
