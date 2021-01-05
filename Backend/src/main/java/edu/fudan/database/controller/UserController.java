@@ -13,7 +13,7 @@ import java.util.Map;
 
 @RestController
 public class UserController {
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
     public UserController(UserService userService) {
@@ -33,7 +33,8 @@ public class UserController {
 //            return ResponseEntity.ok(map);
 //        }
         System.out.println("11111111");
-        map.put("token", "success");
+        String response = userService.login(loginRequest.getUsername(), loginRequest.getPassword());
+        map.put("response", response);
         return ResponseEntity.ok(map);
     }
 }
