@@ -1,6 +1,7 @@
 package edu.fudan.database.controller;
 
 import edu.fudan.database.controller.request.LoginRequest;
+import edu.fudan.database.controller.request.ModifyRequest;
 import edu.fudan.database.domain.Staff;
 import edu.fudan.database.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,15 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/login")
+    @PostMapping("/user/login")
     public ResponseEntity<Staff> login(@RequestBody LoginRequest loginRequest) {
         return ResponseEntity.ok(userService.login(loginRequest.getUsername(), loginRequest.getPassword()));
+    }
+
+    @PostMapping("/user/modify")
+    public ResponseEntity<Staff> modify(@RequestBody ModifyRequest modifyRequest) {
+        return ResponseEntity.ok(userService.modify(
+                modifyRequest.getUsername(), modifyRequest.getPassword(),
+                modifyRequest.getBirth(), modifyRequest.getName()));
     }
 }

@@ -1,7 +1,6 @@
 package edu.fudan.database.service;
 
 import edu.fudan.database.domain.Staff;
-import edu.fudan.database.domain.User;
 import edu.fudan.database.repository.StaffRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +22,10 @@ public class UserService {
                 return staff;
             }
         }
+        return null;
+    }
+
+    public Staff modify(String username, String password, String birth, String name) {
         return null;
     }
 }

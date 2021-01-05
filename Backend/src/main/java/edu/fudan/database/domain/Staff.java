@@ -3,18 +3,17 @@ package edu.fudan.database.domain;
 import jdk.nashorn.internal.objects.annotations.Getter;
 import jdk.nashorn.internal.objects.annotations.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Staff {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Column(unique = true)
     private String username;
     private String password;
-    private String gender; // male, female
     private String birth;
 
     private String name;
@@ -26,15 +25,24 @@ public class Staff {
 
     }
 
-    public Staff(String username, String password, String gender, String birth,
+    public Staff(String username, String password, String birth,
                  String name, String type, String section) {
         this.username = username;
         this.password = password;
-        this.gender = gender;
         this.birth = birth;
         this.name = name;
         this.type = type;
         //this.section = section;
+    }
+
+    @Getter
+    public Long getId() {
+        return id;
+    }
+
+    @Setter
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Getter
@@ -65,16 +73,6 @@ public class Staff {
     @Setter
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    @Getter
-    public String getGender() {
-        return gender;
-    }
-
-    @Setter
-    public void setGender(String gender) {
-        this.gender = gender;
     }
 
     @Getter
