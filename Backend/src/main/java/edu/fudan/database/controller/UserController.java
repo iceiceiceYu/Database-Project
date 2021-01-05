@@ -13,7 +13,7 @@ import java.util.Map;
 
 @RestController
 public class UserController {
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
     public UserController(UserService userService) {
@@ -23,16 +23,8 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> login(@RequestBody LoginRequest loginRequest) {
         Map<String, String> map = new HashMap<>();
-//        String alert = "密码错误！";
-//        String token = authService.login(request.getUsername(), request.getPassword());
-//        if (!token.equals(alert)) {
-//            map.put("token", token);
-//            return ResponseEntity.ok(map);
-//        } else {
-//            map.put(alert, alert);
-//            return ResponseEntity.ok(map);
-//        }
-        map.put("token", "success");
+        String response = userService.login(loginRequest.getUsername(), loginRequest.getPassword());
+        map.put("response", response);
         return ResponseEntity.ok(map);
     }
 }
