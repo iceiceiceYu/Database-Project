@@ -14,6 +14,13 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    @Autowired
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+
+
     public String login(String username, String password) {
         User user = userRepository.findUserByUsername(username);
         if (user == null) {
