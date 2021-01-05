@@ -1,37 +1,28 @@
 package edu.fudan.database.service;
 
+import edu.fudan.database.domain.Staff;
 import edu.fudan.database.domain.User;
-import edu.fudan.database.repository.UserRepository;
+import edu.fudan.database.repository.StaffRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
-    private final UserRepository userRepository;
+    private final StaffRepository staffRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository){
-        this.userRepository = userRepository;
+    public UserService(StaffRepository staffRepository) {
+        this.staffRepository = staffRepository;
     }
 
-    @Autowired
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
-
-
-    public String login(String username, String password) {
-        User user = userRepository.findUserByUsername(username);
-        if (user == null) {
-            return "wrong username";
-        } else {
-            String correctPassword = user.getPassword();
+    public Staff login(String username, String password) {
+        Staff staff = staffRepository.findStaffByUsername(username);
+        if (staff != null) {
+            String correctPassword = staff.getPassword();
             if (correctPassword.equals(password)) {
-                return "success";
-            } else {
-                return "wrong password";
+                return staff;
             }
         }
+        return null;
     }
 }
