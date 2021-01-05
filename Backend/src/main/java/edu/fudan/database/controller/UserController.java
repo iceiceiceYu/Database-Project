@@ -32,6 +32,7 @@ public class UserController {
 //            map.put(alert, alert);
 //            return ResponseEntity.ok(map);
 //        }
+        System.out.println("11111111");
         map.put("token", "success");
         return ResponseEntity.ok(map);
     }
