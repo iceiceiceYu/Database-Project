@@ -1,5 +1,6 @@
 package edu.fudan.database.controller;
 
+import edu.fudan.database.controller.request.LoginRequest;
 import edu.fudan.database.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, String>> login(@RequestBody LoginRequest request) {
+    public ResponseEntity<Map<String, String>> login(@RequestBody LoginRequest loginRequest) {
         Map<String, String> map = new HashMap<>();
 //        String alert = "密码错误！";
 //        String token = authService.login(request.getUsername(), request.getPassword());
