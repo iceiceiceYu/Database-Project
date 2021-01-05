@@ -19,7 +19,7 @@
           </span>
     </el-dialog>
     <el-menu-item style="float: right">
-      <i class="el-icon-user-solid"></i>用户名
+      <i class="el-icon-user-solid"></i>用户名{{username}}
     </el-menu-item>
   </el-menu>
 </template>
@@ -35,6 +35,7 @@
       },
       data() {
         return {
+          username:this.$store.state.username,
           dialogVisible: false,
         };
       },
@@ -50,6 +51,7 @@
           }
         },
         logout() {
+          this.$store.commit('logout');
           this.$router.replace({path: '/login'})
         },
         handleClose(done) {

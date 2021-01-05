@@ -1,7 +1,7 @@
 <template>
   <el-menu
     :default-active="activeIndex"
-    class="el-menu-vertical-demo">
+    class="el-menu-vertical-demo" style="margin-top: 5px">
     <div v-if="title === 'doctor'">
       <el-menu-item index="1">
         <i class="el-icon-location"></i>
@@ -70,16 +70,13 @@
     export default {
         name: "v-side",
       props:{
-          title:{
-            type:String,
-            default:'doctor'
-          },activeIndex:{
+          activeIndex:{
             type: String,
           default: '1'
         }
       },data(){
           return{
-
+            title:this.$store.state.type
           }
       },methods:{
 

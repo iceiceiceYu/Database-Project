@@ -6,6 +6,7 @@ import router from './router'
 import ElementUI from 'element-ui'
 import Navbar from '@/components/navbar'
 import SideBar from '@/components/sidebar'
+import store from './store/index'
 import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.component('v-navbar',Navbar)
@@ -43,7 +44,7 @@ axios.interceptors.response.use(
   error => {
     console.log(error.response)
     if(error) {
-      // 清除token 如果不是register/login, 跳转至login
+     // 清除token 如果不是register/login, 跳转至login
       store.commit('logout')
       router.currentRoute.path !== '/login' &&
       router.currentRoute.path !== '/register' &&
@@ -60,6 +61,7 @@ axios.interceptors.response.use(
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
