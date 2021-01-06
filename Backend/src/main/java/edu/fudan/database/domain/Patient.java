@@ -18,17 +18,19 @@ public class Patient {
     private String section; // mild, severe, critical
     private String wardNurse;
     private int sickBed;
+    private boolean alive;
 
     public Patient() {
 
     }
 
-    public Patient(String name, String level, String section, String wardNurse, int sickBed) {
+    public Patient(String name, String level, String section, String wardNurse, int sickBed, boolean alive) {
         this.name = name;
         this.level = level;
         this.section = section;
         this.wardNurse = wardNurse;
         this.sickBed = sickBed;
+        this.alive = alive;
     }
 
     @Getter
@@ -89,5 +91,15 @@ public class Patient {
     @Setter
     public void setSickBed(int sickBed) {
         this.sickBed = sickBed;
+    }
+
+    @Getter
+    public boolean isAlive() {
+        return alive;
+    }
+
+    @Setter
+    public void setAlive(boolean alive) {
+        this.alive = alive;
     }
 }

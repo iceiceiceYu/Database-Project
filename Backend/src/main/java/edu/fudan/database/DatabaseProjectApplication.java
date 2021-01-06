@@ -120,11 +120,11 @@ public class DatabaseProjectApplication {
             }
 
             private void PatientLoader(PatientRepository patientRepository) {
-                Patient patient1 = new Patient("1", "mild", "mild", "mWard1", 1);
+                Patient patient1 = new Patient("1", "mild", "mild", "mWard1", 1, true);
                 patientRepository.save(patient1);
-                Patient patient2 = new Patient("2", "mild", "mild", "mWard1", 1);
+                Patient patient2 = new Patient("2", "mild", "mild", "mWard1", 2, true);
                 patientRepository.save(patient2);
-                Patient patient3 = new Patient("3", "mild", "mild", "mWard1", 1);
+                Patient patient3 = new Patient("3", "mild", "mild", "mWard1", 3, true);
                 patientRepository.save(patient3);
             }
         };
