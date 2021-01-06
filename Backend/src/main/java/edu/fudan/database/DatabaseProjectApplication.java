@@ -27,8 +27,8 @@ public class DatabaseProjectApplication {
         return new ApplicationRunner() {
             @Override
             public void run(ApplicationArguments args) throws Exception {
-                Staff staff = new Staff("test", "pass", null, "name", "doctor", null);
-                staffRepository.save(staff);
+//                Staff staff = new Staff("test", "pass", null, "name", "doctor", null);
+//                staffRepository.save(staff);
             }
         };
     }
