@@ -35,10 +35,7 @@ public class DoctorService {
         Staff doctor = staffRepository.findStaffByUsername(doctorUsername);
         String section = doctor.getSection();
 
-        List<Patient> patients = (List<Patient>) patientRepository.findPatientBySection(section);
-        // todo:delete
-        System.out.println(patients);
-        return patients;
+        return (List<Patient>) patientRepository.findPatientBySection(section);
     }
 
     public List<Patient> select(String doctorUsername, String type, String value) {
@@ -72,7 +69,7 @@ public class DoctorService {
         List<Patient> selectedPatients = new ArrayList<>();
         for (Patient patient : patients) {
             if (patient.getLevel().equals("mild")) {
-
+                // TODO
             }
         }
         return selectedPatients;
