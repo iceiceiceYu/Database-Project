@@ -1,9 +1,10 @@
 <template>
   <el-menu
     :default-active="activeIndex"
-    class="el-menu-vertical-demo" style="margin-top: 5px">
-    <div v-if="title === 'doctor'">
-      <el-menu-item index="1">
+    class="el-menu-vertical-demo" style="margin-top: 5px"
+  @select="handleSelect">
+    <div v-if="type === 'doctor'">
+      <el-menu-item index="1" >
         <i class="el-icon-location"></i>
         <span>管理病人</span>
       </el-menu-item>
@@ -19,9 +20,8 @@
         <i class="el-icon-setting"></i>
         <span slot="title">导航四</span>
       </el-menu-item>
-
     </div>
-    <div v-else-if="title === 'chief nurse'">
+    <div v-else-if="type === 'chief nurse'">
       <el-menu-item index="1">
         <i class="el-icon-location"></i>
         <span>管理病人</span>
@@ -36,7 +36,7 @@
       </el-menu-item>
 
     </div>
-    <div v-else-if="title === 'hospital nurse'">
+    <div v-else-if="type === 'ward nurse'">
       <el-menu-item index="1">
         <i class="el-icon-location"></i>
         <span>管理病人</span>
@@ -47,7 +47,7 @@
       </el-menu-item>
 
     </div>
-    <div v-else-if="title === 'emergency nurse'">
+    <div v-else-if="type === 'emergency nurse'">
       <el-menu-item index="1">
         <i class="el-icon-location"></i>
         <span>查询病人信息</span>
@@ -76,9 +76,25 @@
         }
       },data(){
           return{
-            title:this.$store.state.type
+            type:this.$store.state.type
           }
       },methods:{
+          handleSelect(key, keyPath) {
+            if(this.type==='doctor'){
+              switch (key) {
+                case '1':
+                  this.$router.replace({path: '/checkPatients'})
+                  break;
+                case '2':
+                  this.$router.replace({path: '/checkStaff'})
+                  break;
+                case '3':
+                  this.$router.replace({path: '/newReport'})
+                  break;
+              }
+            }
+
+          },
 
       }
     }
