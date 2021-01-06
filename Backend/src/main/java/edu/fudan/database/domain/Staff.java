@@ -15,11 +15,9 @@ public class Staff {
     private String username;
     private String password;
     private String birth;
-
     private String name;
     private String type; // doctor, chief nurse, ward nurse, emergency nurse
     private String section;
-
 
     public Staff() {
 
@@ -32,7 +30,7 @@ public class Staff {
         this.birth = birth;
         this.name = name;
         this.type = type;
-        //this.section = section;
+        this.section = section;
     }
 
     @Getter

@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @Entity
 public class Report {
@@ -20,20 +18,19 @@ public class Report {
     private String level; // mild, severe, critical
     private String date;
     private String time;
-    // TODO: 确定是否要加doctor
-    // private String doctor;
+    private String doctor;
 
     public Report() {
 
     }
 
-    public Report(String patient, boolean positive, String level) {
+    public Report(String patient, boolean positive, String level, String date, String time, String doctor) {
         this.patient = patient;
         this.positive = positive;
         this.level = level;
-        String currTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-        this.date = currTime.split(" ")[0];
-        this.time = currTime.split(" ")[1];
+        this.date = date;
+        this.time = time;
+        this.doctor = doctor;
     }
 
     @Getter
@@ -94,5 +91,15 @@ public class Report {
     @Setter
     public void setTime(String time) {
         this.time = time;
+    }
+
+    @Getter
+    public String getDoctor() {
+        return doctor;
+    }
+
+    @Setter
+    public void setDoctor(String doctor) {
+        this.doctor = doctor;
     }
 }

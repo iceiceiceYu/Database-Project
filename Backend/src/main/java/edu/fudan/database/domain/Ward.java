@@ -1,5 +1,8 @@
 package edu.fudan.database.domain;
 
+import jdk.nashorn.internal.objects.annotations.Getter;
+import jdk.nashorn.internal.objects.annotations.Setter;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -10,8 +13,71 @@ public class Ward {
     private Long id;
     private String level; // mild, severe, critical
     private int capacity;
-    private String doctor;
-    private String chiefNurse;
+
     @ElementCollection
-    private Set<String> hospitalNurse;
+    private Set<String> patients;
+
+    @ElementCollection
+    private Set<Integer> sickBeds;
+
+    public Ward() {
+
+    }
+
+    public Ward(String level, int capacity, Set<String> patients, Set<Integer> sickBeds) {
+        this.level = level;
+        this.capacity = capacity;
+        this.patients = patients;
+        this.sickBeds = sickBeds;
+    }
+
+    @Getter
+    public Long getId() {
+        return id;
+    }
+
+    @Setter
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Getter
+    public String getLevel() {
+        return level;
+    }
+
+    @Setter
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    @Getter
+    public int getCapacity() {
+        return capacity;
+    }
+
+    @Setter
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    @Getter
+    public Set<String> getPatients() {
+        return patients;
+    }
+
+    @Setter
+    public void setPatients(Set<String> patients) {
+        this.patients = patients;
+    }
+
+    @Getter
+    public Set<Integer> getSickBeds() {
+        return sickBeds;
+    }
+
+    @Setter
+    public void setSickBeds(Set<Integer> sickBeds) {
+        this.sickBeds = sickBeds;
+    }
 }
