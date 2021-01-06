@@ -4,7 +4,7 @@
       <v-navbar :activeIndex="'1'"></v-navbar>
     </el-header>
     <el-aside>
-       <v-side :title="'chief nurse'" :activeIndex="'1'"></v-side>
+       <v-side :activeIndex="'1'"></v-side>
     </el-aside>
     <el-main>
 
@@ -17,7 +17,7 @@
     name: "Dashboard",
     data() {
       return {
-        title:'doctor',
+
       };
     },
     methods: {

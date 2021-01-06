@@ -1,7 +1,6 @@
 <template>
   <div>
     <h1>{{msg}}</h1>
-
     <div class="line"></div>
     <el-row :gutter="20">
       <el-col :span="8" :offset="8">
@@ -20,6 +19,7 @@
       </el-col>
     </el-row>
   </div>
+
 </template>
 <script>
   export default {
@@ -46,22 +46,23 @@
       submitClick(formName){
         this.$refs[formName].validate(valid => {
           if(valid) {
-            this.$axios.post('/login', {
+            this.$axios.post('/user/login', {
               username: this.loginForm.username,
               password: this.loginForm.password
             })
               .then(resp => {
-                if (resp.status === 200 && resp.data.hasOwnProperty("token")) {
+                console.log(resp.data)
+                if (resp.status === 200 && resp.data!==null) {
                   alert('登录成功！');
                   this.$store.commit('login', resp.data);
                   this.$router.replace({path: '/dashboard'})
                 } else {
-                  alert('login error')
+                  alert('login error1')
                 }
               })
               .catch(error => {
                 console.log(error);
-                alert('login error')
+                alert('login error2')
               })
           } else {
             console.log("error submit！")
