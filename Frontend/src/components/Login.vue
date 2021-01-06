@@ -52,20 +52,20 @@
             })
               .then(resp => {
                 console.log(resp.data)
-                if (resp.status === 200 && resp.data!==null) {
+                if (resp.status === 200 && resp.data!=='') {
                   alert('登录成功！');
                   this.$store.commit('login', resp.data);
                   this.$router.replace({path: '/dashboard'})
                 } else {
-                  alert('login error1')
+                  alert('登陆失败！请检查用户名或密码。')
                 }
               })
               .catch(error => {
                 console.log(error);
-                alert('login error2')
+                alert('网络连接失败')
               })
           } else {
-            console.log("error submit！")
+            console.log("错误提交！")
             return false
           }
         })
