@@ -12,6 +12,7 @@ public class Section {
     private String level; // mild, severe, critical
     private String doctor;
     private String chiefNurse;
+
     @ElementCollection
     private Set<String> wardNurse;
 
