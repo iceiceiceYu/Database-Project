@@ -26,6 +26,14 @@ public class UserService {
     }
 
     public Staff modify(String username, String password, String birth, String name) {
+        Staff staff = staffRepository.findStaffByUsername(username);
+        if (staff != null) {
+            staff.setPassword(password);
+            staff.setBirth(birth);
+            staff.setName(name);
+            staffRepository.save(staff);
+            return staff;
+        }
         return null;
     }
 }

@@ -17,7 +17,7 @@ public class Staff {
     private String birth;
 
     private String name;
-    private String type; // doctor, chief nurse, hospital nurse, emergency nurse
+    private String type; // doctor, chief nurse, ward nurse, emergency nurse
     private String section;
 
 
