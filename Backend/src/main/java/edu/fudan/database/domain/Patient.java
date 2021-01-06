@@ -15,6 +15,8 @@ public class Patient {
     private Long id;
     private String name;
     private String level; // mild, severe, critical
+    private String section;
+    private int sickBed;
 
     @Getter
     public Long getId() {

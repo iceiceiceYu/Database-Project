@@ -1,4 +1,4 @@
-package edu.fudan.database.controller.request;
+package edu.fudan.database.controller.request.user;
 
 public class LoginRequest {
     private String username;

@@ -1,17 +1,15 @@
-package edu.fudan.database.controller.request;
+package edu.fudan.database.controller.request.user;
 
-public class ModifyRequest {
+public class ModifyInfoRequest {
     private String username;
-    private String password;
     private String birth;
     private String name;
 
-    public ModifyRequest() {
+    public ModifyInfoRequest() {
     }
 
-    public ModifyRequest(String username, String password, String birth, String name) {
+    public ModifyInfoRequest(String username, String birth, String name) {
         this.username = username;
-        this.password = password;
         this.birth = birth;
         this.name = name;
     }
@@ -22,14 +20,6 @@ public class ModifyRequest {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getBirth() {

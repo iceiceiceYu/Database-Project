@@ -14,6 +14,10 @@ public class UserService {
         this.staffRepository = staffRepository;
     }
 
+    public Staff info(String username) {
+        return staffRepository.findStaffByUsername(username);
+    }
+
     public Staff login(String username, String password) {
         Staff staff = staffRepository.findStaffByUsername(username);
         if (staff != null) {
@@ -25,15 +29,28 @@ public class UserService {
         return null;
     }
 
-    public Staff modify(String username, String password, String birth, String name) {
+    public String modifyInfo(String username, String birth, String name) {
         Staff staff = staffRepository.findStaffByUsername(username);
         if (staff != null) {
-            staff.setPassword(password);
             staff.setBirth(birth);
             staff.setName(name);
             staffRepository.save(staff);
-            return staff;
+            return "success";
         }
-        return null;
+        return "error";
+    }
+
+    public String modifyPass(String username, String oldPassword, String newPassword) {
+        Staff staff = staffRepository.findStaffByUsername(username);
+        if (staff != null) {
+            if (staff.getPassword().equals(oldPassword)) {
+                staff.setPassword(newPassword);
+                staffRepository.save(staff);
+                return "success";
+            } else {
+                return "wrong password";
+            }
+        }
+        return "error";
     }
 }

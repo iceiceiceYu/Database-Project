@@ -15,7 +15,7 @@ public class Report {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String name;
+    private String patient;
     private boolean positive; // true - positive, false - negative
     private String level; // mild, severe, critical
     private String date;
@@ -27,8 +27,8 @@ public class Report {
 
     }
 
-    public Report(String name, boolean positive, String level) {
-        this.name = name;
+    public Report(String patient, boolean positive, String level) {
+        this.patient = patient;
         this.positive = positive;
         this.level = level;
         String currTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
@@ -47,13 +47,13 @@ public class Report {
     }
 
     @Getter
-    public String getName() {
-        return name;
+    public String getPatient() {
+        return patient;
     }
 
     @Setter
-    public void setName(String name) {
-        this.name = name;
+    public void setPatient(String patient) {
+        this.patient = patient;
     }
 
     @Getter
