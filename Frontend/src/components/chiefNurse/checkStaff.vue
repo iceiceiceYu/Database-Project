@@ -62,7 +62,7 @@
 
 <script>
   export default {
-    name: "checkStaff",
+    name: "DoctorCheckStaff",
     data() {
       return {
         chiefNurse: [{

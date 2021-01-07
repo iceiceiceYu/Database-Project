@@ -34,7 +34,7 @@ public class ChiefNurseController {
                 selectRequest.getUsername(), selectRequest.getType(), selectRequest.getUsername()));
     }
 
-    @PostMapping("/doctor/wardNurse")
+    @PostMapping("/chiefNurse/wardNurse")
     public ResponseEntity<List<Staff>> wardNurse(@RequestBody String chiefNurseUsername) {
         return ResponseEntity.ok(chiefNurseService.wardNurse(chiefNurseUsername));
     }
