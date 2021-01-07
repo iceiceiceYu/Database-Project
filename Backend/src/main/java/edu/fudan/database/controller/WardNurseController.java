@@ -37,6 +37,6 @@ public class WardNurseController {
 
     @PostMapping("/wardNurse/dailyInfo")
     public ResponseEntity<DailyInfo> dailyInfo(@RequestBody DailyInfoRequest dailyInfoRequest) {
-
+        return null;
     }
 }
