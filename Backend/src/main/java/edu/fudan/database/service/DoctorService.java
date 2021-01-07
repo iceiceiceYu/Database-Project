@@ -1,7 +1,7 @@
 package edu.fudan.database.service;
 
 import edu.fudan.database.domain.Patient;
-import edu.fudan.database.domain.Section;
+import edu.fudan.database.domain.Report;
 import edu.fudan.database.domain.Staff;
 import edu.fudan.database.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +12,11 @@ import java.util.List;
 
 @Service
 public class DoctorService {
-    private PatientRepository patientRepository;
-    private ReportRepository reportRepository;
-    private SectionRepository sectionRepository;
-    private StaffRepository staffRepository;
-    private WardRepository wardRepository;
+    private final PatientRepository patientRepository;
+    private final ReportRepository reportRepository;
+    private final SectionRepository sectionRepository;
+    private final StaffRepository staffRepository;
+    private final WardRepository wardRepository;
 
     @Autowired
     public DoctorService(PatientRepository patientRepository,
@@ -87,11 +87,12 @@ public class DoctorService {
 
     private List<Patient> isAlive(List<Patient> patients) {
         List<Patient> selectedPatients = new ArrayList<>();
-        for (Patient patient : patients) {
-            if (patient.isAlive()) {
-                selectedPatients.add(patient);
-            }
-        }
+        // TODO
+//        for (Patient patient : patients) {
+//            if (patient.isAlive()) {
+//                selectedPatients.add(patient);
+//            }
+//        }
         return selectedPatients;
     }
 
@@ -99,13 +100,40 @@ public class DoctorService {
         Staff doctor = staffRepository.findStaffByUsername(doctorUsername);
         String section = doctor.getSection();
 
-        return (List<Staff>) staffRepository.findStaffBySectionAndType(section,"chief nurse");
+        return (List<Staff>) staffRepository.findStaffBySectionAndType(section, "chief nurse");
     }
 
     public List<Staff> wardNurse(String doctorUsername) {
         Staff doctor = staffRepository.findStaffByUsername(doctorUsername);
         String section = doctor.getSection();
 
-        return (List<Staff>) staffRepository.findStaffBySectionAndType(section,"ward nurse");
+        return (List<Staff>) staffRepository.findStaffBySectionAndType(section, "ward nurse");
+    }
+
+    public Patient modifyLevel(Long patientId, String newLevel) {
+        Patient patient = patientRepository.findPatientById(patientId);
+        patient.setLevel(newLevel);
+        patientRepository.save(patient);
+        return patient;
+    }
+
+    public Patient modifyAlive(Long patientId) {
+        Patient patient = patientRepository.findPatientById(patientId);
+        patient.setStatus(-1);
+        patientRepository.save(patient);
+        return patient;
+    }
+
+    public Report addReport(Long patientId, String patientName, boolean positive, String level, String date, String doctor) {
+        Report report = new Report(patientId, patientName, positive, level, date, doctor);
+        reportRepository.save(report);
+        return report;
+    }
+
+    public Patient discharge(Long patientId) {
+        Patient patient = patientRepository.findPatientById(patientId);
+        patient.setStatus(1);
+        patientRepository.save(patient);
+        return patient;
     }
 }

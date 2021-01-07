@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin
 public class EmergencyNurseController {
-    private EmergencyNurseService emergencyNurseService;
+    private final EmergencyNurseService emergencyNurseService;
 
     @Autowired
     public EmergencyNurseController(EmergencyNurseService emergencyNurseService) {

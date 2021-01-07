@@ -6,11 +6,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EmergencyNurseService {
-    private PatientRepository patientRepository;
-    private ReportRepository reportRepository;
-    private SectionRepository sectionRepository;
-    private StaffRepository staffRepository;
-    private WardRepository wardRepository;
+    private final PatientRepository patientRepository;
+    private final ReportRepository reportRepository;
+    private final SectionRepository sectionRepository;
+    private final StaffRepository staffRepository;
+    private final WardRepository wardRepository;
 
     @Autowired
     public EmergencyNurseService(PatientRepository patientRepository,
