@@ -3,6 +3,7 @@ package edu.fudan.database;
 import edu.fudan.database.domain.Patient;
 import edu.fudan.database.domain.Section;
 import edu.fudan.database.domain.Staff;
+import edu.fudan.database.domain.Ward;
 import edu.fudan.database.repository.*;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -30,17 +31,30 @@ public class DatabaseProjectApplication {
             @Override
             public void run(ApplicationArguments args) throws Exception {
                 SectionLoader(sectionRepository);
-                StaffLoader(staffRepository);
                 WardLoader(wardRepository);
+                StaffLoader(staffRepository);
                 PatientLoader(patientRepository);
             }
 
             private void SectionLoader(SectionRepository sectionRepository) {
+                Set<String> mWardNurse = new HashSet<>();
+                mWardNurse.add("mWard1");
+                mWardNurse.add("mWard2");
+                mWardNurse.add("mWard3");
+                mWardNurse.add("mWard4");
+                Set<String> sWardNurse = new HashSet<>();
+                sWardNurse.add("sWard1");
+                sWardNurse.add("sWard2");
+                sWardNurse.add("sWard3");
+                Set<String> cWardNurse = new HashSet<>();
+                cWardNurse.add("cWard1");
+                cWardNurse.add("cWard2");
+                cWardNurse.add("cWard3");
+
                 Set<String> mWard = new HashSet<>();
                 mWard.add("mWard1");
                 mWard.add("mWard2");
                 mWard.add("mWard3");
-                mWard.add("mWard4");
                 Set<String> sWard = new HashSet<>();
                 sWard.add("sWard1");
                 sWard.add("sWard2");
@@ -50,12 +64,35 @@ public class DatabaseProjectApplication {
                 cWard.add("cWard2");
                 cWard.add("cWard3");
 
-                Section mildSection = new Section("mild", "mDoctor", "mChief", mWard);
+                Section mildSection = new Section("mild", "mDoctor", "mChief", mWardNurse, mWard);
                 sectionRepository.save(mildSection);
-                Section severeSection = new Section("severe", "sDoctor", "sChief", sWard);
+                Section severeSection = new Section("severe", "sDoctor", "sChief", sWardNurse, sWard);
                 sectionRepository.save(severeSection);
-                Section criticalSection = new Section("critical", "cDoctor", "cChief", cWard);
+                Section criticalSection = new Section("critical", "cDoctor", "cChief", cWardNurse, cWard);
                 sectionRepository.save(criticalSection);
+            }
+
+            private void WardLoader(WardRepository wardRepository) {
+                Ward mWard1 = new Ward("mild", "mWard1", 4, new HashSet<>(), new HashSet<>());
+                wardRepository.save(mWard1);
+                Ward mWard2 = new Ward("mild", "mWard2", 4, new HashSet<>(), new HashSet<>());
+                wardRepository.save(mWard2);
+                Ward mWard3 = new Ward("mild", "mWard3", 4, new HashSet<>(), new HashSet<>());
+                wardRepository.save(mWard3);
+
+                Ward sWard1 = new Ward("severe", "sWard1", 2, new HashSet<>(), new HashSet<>());
+                wardRepository.save(sWard1);
+                Ward sWard2 = new Ward("severe", "sWard2", 2, new HashSet<>(), new HashSet<>());
+                wardRepository.save(sWard2);
+                Ward sWard3 = new Ward("severe", "sWard3", 2, new HashSet<>(), new HashSet<>());
+                wardRepository.save(sWard3);
+
+                Ward cWard1 = new Ward("severe", "cWard1", 1, new HashSet<>(), new HashSet<>());
+                wardRepository.save(cWard1);
+                Ward cWard2 = new Ward("severe", "cWard2", 1, new HashSet<>(), new HashSet<>());
+                wardRepository.save(cWard2);
+                Ward cWard3 = new Ward("severe", "cWard3", 1, new HashSet<>(), new HashSet<>());
+                wardRepository.save(cWard3);
             }
 
             private void StaffLoader(StaffRepository staffRepository) {
@@ -115,14 +152,10 @@ public class DatabaseProjectApplication {
                 // TODO：添加急诊护士
             }
 
-            private void WardLoader(WardRepository wardRepository) {
-                // TODO
-            }
-
             private void PatientLoader(PatientRepository patientRepository) {
                 Patient patient1 = new Patient("1", "male", 40, "mild", "mild", "mWard1", 1, 0);
                 patientRepository.save(patient1);
-                Patient patient2 = new Patient("2", "female", 39, "mild", "mild", "mWard1", 2,0);
+                Patient patient2 = new Patient("2", "female", 39, "mild", "mild", "mWard1", 2, 0);
                 patientRepository.save(patient2);
                 Patient patient3 = new Patient("3", "female", 25, "mild", "mild", "mWard1", 3, 0);
                 patientRepository.save(patient3);

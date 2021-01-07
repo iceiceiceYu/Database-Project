@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -43,7 +44,7 @@ public class DoctorController {
     }
 
     @PostMapping("/doctor/wardNurse")
-    public ResponseEntity<List<Staff>> wardNurse(@RequestBody String doctorUsername) {
+    public ResponseEntity<Map<Staff, String>> wardNurse(@RequestBody String doctorUsername) {
         return ResponseEntity.ok(doctorService.wardNurse(doctorUsername));
     }
 

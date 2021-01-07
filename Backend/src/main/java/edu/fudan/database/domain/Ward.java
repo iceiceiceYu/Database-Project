@@ -12,6 +12,7 @@ public class Ward {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String level; // mild, severe, critical
+    private String name;
     private int capacity;
 
     @ElementCollection
@@ -24,8 +25,9 @@ public class Ward {
 
     }
 
-    public Ward(String level, int capacity, Set<String> patients, Set<Integer> sickBeds) {
+    public Ward(String level, String name, int capacity, Set<String> patients, Set<Integer> sickBeds) {
         this.level = level;
+        this.name = name;
         this.capacity = capacity;
         this.patients = patients;
         this.sickBeds = sickBeds;
@@ -49,6 +51,16 @@ public class Ward {
     @Setter
     public void setLevel(String level) {
         this.level = level;
+    }
+
+    @Getter
+    public String getName() {
+        return name;
+    }
+
+    @Setter
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Getter
