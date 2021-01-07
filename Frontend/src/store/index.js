@@ -13,18 +13,22 @@ export default new Vuex.Store({
       localStorage.setItem('id', data.id)
       localStorage.setItem('username', data.username)
       localStorage.setItem('type',data.type)
+      localStorage.setItem('section',data.section)
       state.id = data.id
       state.username = data.username
       state.type =data.type
+      state.section = data.section
     },
     logout(state) {
       // 移除token
       localStorage.removeItem('id')
       localStorage.removeItem('username')
       localStorage.removeItem('type')
+      localStorage.removeItem('section')
       state.id = null
       state.username = null
       state.type = null
+      state.section =null
     }
   },
   actions: {

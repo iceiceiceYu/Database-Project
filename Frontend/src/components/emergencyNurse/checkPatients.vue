@@ -40,14 +40,32 @@
           <el-table-column
             prop="level"
             label="病情等级">
+            <template slot-scope="scope">
+              <span v-if="scope.row.level==='mild'">轻症</span>
+              <span v-else-if="scope.row.level==='severe'">重症</span>
+              <span v-else-if="scope.row.level==='critical'">危重症</span>
+            </template>
           </el-table-column>
           <el-table-column
             prop="section"
             label="所属病区">
+            <template slot-scope="scope">
+              <span v-if="scope.row.section==='mild'">轻症区</span>
+              <span v-else-if="scope.row.section==='severe'">重症区</span>
+              <span v-else-if="scope.row.section==='critical'">危重症区</span>
+            </template>
           </el-table-column>
           <el-table-column
             prop="sickBed"
             label="病床">
+          </el-table-column>
+          <el-table-column
+            prop="alive"
+            label="生存状态">
+            <template slot-scope="scope">
+              <span v-if="scope.row.alive">正常</span>
+              <span v-else>死亡</span>
+            </template>
           </el-table-column>
         </el-table>
       </el-main>
@@ -101,7 +119,8 @@
           name: '',
           level: 'mild',
           section: 'mild',
-          sickBed: 12
+          sickBed: 12,
+          alive:true
         }]
       }
     },created(){
