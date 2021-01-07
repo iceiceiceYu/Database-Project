@@ -124,7 +124,7 @@ public class DoctorService {
         String wardNurse = staff.getUsername();
         for (Patient patient : patients) {
             if (patient.getWardNurse().equals(wardNurse)){
-                sb.append(wardNurse).append(" ");
+                sb.append(patient.getName()).append(" ");
             }
         }
         return sb.toString();
