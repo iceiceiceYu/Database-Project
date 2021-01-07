@@ -1,8 +1,9 @@
 package edu.fudan.database.controller;
 
 import edu.fudan.database.controller.request.SelectRequest;
+import edu.fudan.database.controller.request.WardNurse.DailyInfoRequest;
+import edu.fudan.database.domain.DailyInfo;
 import edu.fudan.database.domain.Patient;
-import edu.fudan.database.domain.Staff;
 import edu.fudan.database.service.WardNurseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,5 +33,10 @@ public class WardNurseController {
     public ResponseEntity<List<Patient>> select(@RequestBody SelectRequest selectRequest) {
         return ResponseEntity.ok(wardNurseService.select(
                 selectRequest.getUsername(), selectRequest.getType(), selectRequest.getType()));
+    }
+
+    @PostMapping("/wardNurse/dailyInfo")
+    public ResponseEntity<DailyInfo> dailyInfo(@RequestBody DailyInfoRequest dailyInfoRequest) {
+
     }
 }

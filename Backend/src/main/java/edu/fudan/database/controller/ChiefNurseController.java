@@ -1,6 +1,7 @@
 package edu.fudan.database.controller;
 
 import edu.fudan.database.controller.request.SelectRequest;
+import edu.fudan.database.controller.request.chiefNurse.ModifyRequest;
 import edu.fudan.database.domain.Patient;
 import edu.fudan.database.domain.Staff;
 import edu.fudan.database.service.ChiefNurseService;
@@ -37,5 +38,27 @@ public class ChiefNurseController {
     @PostMapping("/chiefNurse/wardNurse")
     public ResponseEntity<List<Staff>> wardNurse(@RequestBody String chiefNurseUsername) {
         return ResponseEntity.ok(chiefNurseService.wardNurse(chiefNurseUsername));
+    }
+
+    @PostMapping("/chiefNurse/patientsOfNurse")
+    public ResponseEntity<List<String>> patientsOfNurse(@RequestBody String chiefNurseUsername) {
+        return ResponseEntity.ok(chiefNurseService.patientsOfNurse(chiefNurseUsername));
+    }
+
+    @PostMapping("/chiefNurse/newNurse")
+    public ResponseEntity<Staff> newNurse(@RequestBody ModifyRequest modifyRequest) {
+        return ResponseEntity.ok(chiefNurseService.newNurse(
+                modifyRequest.getChiefNurse(), modifyRequest.getNurseName()));
+    }
+
+    @PostMapping("/chiefNurse/deleteNurse")
+    public ResponseEntity<String> deleteNurse(@RequestBody ModifyRequest modifyRequest) {
+        return ResponseEntity.ok(chiefNurseService.deleteNurse(
+                modifyRequest.getChiefNurse(), modifyRequest.getNurseName()));
+    }
+
+    @PostMapping("/chiefNurse/searchBackupWard")
+    public ResponseEntity<List<Staff>> searchBackupWard() {
+        return ResponseEntity.ok(chiefNurseService.searchBackupWard());
     }
 }

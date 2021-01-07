@@ -132,7 +132,6 @@ public class DoctorService {
                 sb.append(patient.getName()).append(" ");
             }
         }
-        System.out.println(sb.toString());
         return sb.toString();
     }
 

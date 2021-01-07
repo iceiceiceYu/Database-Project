@@ -149,6 +149,25 @@ public class DatabaseProjectApplication {
                         "2000-01-01", "cWard3", "ward nurse", "critical");
                 staffRepository.save(cWard3);
 
+                Staff backupWard1 = new Staff("backupWard1", "123456",
+                        "2000-02-02", "backupWard1", "ward nurse", "backup");
+                staffRepository.save(backupWard1);
+                Staff backupWard2 = new Staff("backupWard2", "123456",
+                        "2000-02-02", "backupWard2", "ward nurse", "backup");
+                staffRepository.save(backupWard2);
+                Staff backupWard3 = new Staff("backupWard3", "123456",
+                        "2000-02-02", "backupWard3", "ward nurse", "backup");
+                staffRepository.save(backupWard3);
+                Staff backupWard4 = new Staff("backupWard4", "123456",
+                        "2000-02-02", "backupWard4", "ward nurse", "backup");
+                staffRepository.save(backupWard4);
+                Staff backupWard5 = new Staff("backupWard5", "123456",
+                        "2000-02-02", "backupWard5", "ward nurse", "backup");
+                staffRepository.save(backupWard5);
+                Staff backupWard6 = new Staff("backupWard6", "123456",
+                        "2000-02-02", "backupWard6", "ward nurse", "backup");
+                staffRepository.save(backupWard6);
+
                 // TODO：添加急诊护士
             }
 

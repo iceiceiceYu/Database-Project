@@ -17,21 +17,21 @@ public class Section {
     private String chiefNurse;
 
     @ElementCollection
-    private Set<String> wardNurse;
+    private Set<String> wardNurses;
 
     @ElementCollection
-    private Set<String> ward;
+    private Set<String> wards;
 
     public Section() {
 
     }
 
-    public Section(String level, String doctor, String chiefNurse, Set<String> wardNurse, Set<String> ward) {
+    public Section(String level, String doctor, String chiefNurse, Set<String> wardNurses, Set<String> wards) {
         this.level = level;
         this.doctor = doctor;
         this.chiefNurse = chiefNurse;
-        this.wardNurse = wardNurse;
-        this.ward = ward;
+        this.wardNurses = wardNurses;
+        this.wards = wards;
     }
 
     @Getter
@@ -75,22 +75,22 @@ public class Section {
     }
 
     @Getter
-    public Set<String> getWardNurse() {
-        return wardNurse;
+    public Set<String> getWardNurses() {
+        return wardNurses;
     }
 
     @Setter
-    public void setWardNurse(Set<String> wardNurse) {
-        this.wardNurse = wardNurse;
+    public void setWardNurses(Set<String> wardNurse) {
+        this.wardNurses = wardNurse;
     }
 
     @Getter
-    public Set<String> getWard() {
-        return ward;
+    public Set<String> getWards() {
+        return wards;
     }
 
     @Setter
-    public void setWard(Set<String> ward) {
-        this.ward = ward;
+    public void setWards(Set<String> ward) {
+        this.wards = ward;
     }
 }
