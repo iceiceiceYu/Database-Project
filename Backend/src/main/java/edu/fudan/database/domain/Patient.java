@@ -14,23 +14,29 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    private String gender;
+    private int age;
     private String level; // mild, severe, critical
     private String section; // mild, severe, critical
     private String wardNurse;
     private int sickBed;
     private boolean alive;
+    private boolean discharge;
 
     public Patient() {
 
     }
 
-    public Patient(String name, String level, String section, String wardNurse, int sickBed, boolean alive) {
+    public Patient(String name, String gender, int age, String level, String section, String wardNurse, int sickBed, boolean alive, boolean discharge) {
         this.name = name;
+        this.gender = gender;
+        this.age = age;
         this.level = level;
         this.section = section;
         this.wardNurse = wardNurse;
         this.sickBed = sickBed;
         this.alive = alive;
+        this.discharge = discharge;
     }
 
     @Getter
@@ -51,6 +57,26 @@ public class Patient {
     @Setter
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Getter
+    public String getGender() {
+        return gender;
+    }
+
+    @Setter
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    @Getter
+    public int getAge() {
+        return age;
+    }
+
+    @Setter
+    public void setAge(int age) {
+        this.age = age;
     }
 
     @Getter
@@ -101,5 +127,15 @@ public class Patient {
     @Setter
     public void setAlive(boolean alive) {
         this.alive = alive;
+    }
+
+    @Getter
+    public boolean isDischarge() {
+        return discharge;
+    }
+
+    @Setter
+    public void setDischarge(boolean discharge) {
+        this.discharge = discharge;
     }
 }
