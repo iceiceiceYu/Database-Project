@@ -172,13 +172,13 @@ public class DatabaseProjectApplication {
             }
 
             private void PatientLoader(PatientRepository patientRepository) {
-                Patient patient1 = new Patient("张三", "male", 40, "mild", "mild", "mWard1", "轻症病房1", 1, 0);
+                Patient patient1 = new Patient("张三", "male", 40, "mild", false, "mild", "mWard1", "轻症病房1", 1, 0);
                 patientRepository.save(patient1);
-                Patient patient2 = new Patient("李四", "female", 39, "mild", "mild", "mWard1", "轻症病房1", 2, 0);
+                Patient patient2 = new Patient("李四", "female", 39, "mild", false, "mild", "mWard1", "轻症病房1", 2, 0);
                 patientRepository.save(patient2);
-                Patient patient3 = new Patient("王五", "female", 25, "mild", "mild", "mWard1", "轻症病房1", 3, 0);
+                Patient patient3 = new Patient("王五", "female", 25, "mild", false, "mild", "mWard1", "轻症病房1", 3, 0);
                 patientRepository.save(patient3);
-                Patient patient4 = new Patient("赵六", "male", 28, "mild", "mild", "mWard2", "轻症病房1", 4, 0);
+                Patient patient4 = new Patient("赵六", "male", 28, "mild", false, "mild", "mWard2", "轻症病房1", 4, 0);
                 patientRepository.save(patient4);
             }
         };

@@ -17,6 +17,7 @@ public class Patient {
     private String gender;
     private int age;
     private String level; // mild, severe, critical
+    private boolean quarantined;
     private String section; // mild, severe, critical
     private String wardNurse;
     private String wardName;
@@ -27,11 +28,19 @@ public class Patient {
 
     }
 
-    public Patient(String name, String gender, int age, String level, String section, String wardNurse, String wardName, int sickBed, int status) {
+    public Patient(String name, String gender, int age, String level) {
         this.name = name;
         this.gender = gender;
         this.age = age;
         this.level = level;
+    }
+
+    public Patient(String name, String gender, int age, String level, boolean quarantined, String section, String wardNurse, String wardName, int sickBed, int status) {
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
+        this.level = level;
+        this.quarantined = quarantined;
         this.section = section;
         this.wardNurse = wardNurse;
         this.wardName = wardName;
@@ -87,6 +96,16 @@ public class Patient {
     @Setter
     public void setLevel(String level) {
         this.level = level;
+    }
+
+    @Getter
+    public boolean isQuarantined() {
+        return quarantined;
+    }
+
+    @Setter
+    public void setQuarantined(boolean quarantined) {
+        this.quarantined = quarantined;
     }
 
     @Getter

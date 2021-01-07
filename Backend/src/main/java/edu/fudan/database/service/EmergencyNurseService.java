@@ -1,5 +1,6 @@
 package edu.fudan.database.service;
 
+import edu.fudan.database.domain.Patient;
 import edu.fudan.database.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,14 +15,21 @@ public class EmergencyNurseService {
 
     @Autowired
     public EmergencyNurseService(PatientRepository patientRepository,
-                         ReportRepository reportRepository,
-                         SectionRepository sectionRepository,
-                         StaffRepository staffRepository,
-                         WardRepository wardRepository) {
+                                 ReportRepository reportRepository,
+                                 SectionRepository sectionRepository,
+                                 StaffRepository staffRepository,
+                                 WardRepository wardRepository) {
         this.patientRepository = patientRepository;
         this.reportRepository = reportRepository;
         this.sectionRepository = sectionRepository;
         this.staffRepository = staffRepository;
         this.wardRepository = wardRepository;
     }
+
+    public Patient newPatient(String name, String gender, int age, String level) {
+        Patient patient = new Patient(name, gender, age, level);
+        return SystemService.arrangePatient(patient);
+    }
+
+
 }

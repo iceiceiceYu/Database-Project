@@ -154,18 +154,12 @@ public class ChiefNurseService {
         Section section = sectionRepository.findSectionByChiefNurse(chiefNurseUsername);
         Set<String> wardNurses = section.getWardNurses();
 
-        if (sectionName.equals("mild")) {
-            if ((wardNurses.size() - 1) * 3 < patients.size()) {
-                return "fail";
-            }
-        } else if (sectionName.equals("severe")) {
-            if ((wardNurses.size() - 1) * 2 < patients.size()) {
-                return "fail";
-            }
-        } else {
-            if ((wardNurses.size() - 1) < patients.size()) {
-                return "fail";
-            }
+        if (sectionName.equals("mild") && (wardNurses.size() - 1) * 3 < patients.size()) {
+            return "fail";
+        } else if (sectionName.equals("severe") && (wardNurses.size() - 1) * 2 < patients.size()) {
+            return "fail";
+        } else if (sectionName.equals("critical") && (wardNurses.size() - 1) < patients.size()) {
+            return "fail";
         }
 
         wardNurses.remove(wardNurseUsername);
