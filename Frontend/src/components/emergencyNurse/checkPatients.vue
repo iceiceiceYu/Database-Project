@@ -57,7 +57,7 @@
 
 <script>
   export default {
-    name: "WardNurseCheckPatients",
+    name: "EmergencyNurseCheckPatients",
     data() {
       return {
         selectRange:{
@@ -108,7 +108,7 @@
       this.getAllPatients();
     },methods:{
       getAllPatients(){
-        this.$axios.post('/wardNurse/getPatientInfo',
+        this.$axios.post('/emergencyNurse/getPatientInfo',
           this.$store.state.username
         ).then(resp => {
           this.tableData=resp.data
@@ -119,7 +119,7 @@
           })
       },
       getPatients(){
-        this.$axios.post('/wardNurse/select',{
+        this.$axios.post('/emergencyNurse/select',{
           username:this.$store.state.username,
           type:this.selectRange.value[0],
           value:this.selectRange.value[1]

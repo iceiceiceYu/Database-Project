@@ -5,10 +5,10 @@
     </el-header>
     <el-container>
     <el-aside>
-      <v-side :activeIndex="'3'"></v-side>
+      <v-side :activeIndex="'2'"></v-side>
     </el-aside>
     <el-main>
-      <p>核酸检测单</p>
+      <p>每日信息</p>
     </el-main>
     </el-container>
   </el-container>
@@ -16,7 +16,7 @@
 
 <script>
     export default {
-        name: "DoctorNewReport"
+        name: "DailyInfo"
     }
 </script>
 

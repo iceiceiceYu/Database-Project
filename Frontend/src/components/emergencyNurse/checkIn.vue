@@ -8,7 +8,7 @@
       <v-side :activeIndex="'2'"></v-side>
     </el-aside>
     <el-main>
-      <p>每日信息</p>
+      <p>登记入院信息</p>
     </el-main>
     </el-container>
   </el-container>
@@ -16,7 +16,7 @@
 
 <script>
     export default {
-        name: "DailyInfo"
+        name: "CheckIn"
     }
 </script>
 

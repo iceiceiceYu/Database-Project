@@ -119,7 +119,7 @@
           })
       },
       getPatients(){
-        this.$axios.post('/doctor/getPatients',{
+        this.$axios.post('/doctor/select',{
           username:this.$store.state.username,
           type:this.selectRange.value[0],
           value:this.selectRange.value[1]

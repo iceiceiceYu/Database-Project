@@ -57,7 +57,7 @@
 
 <script>
   export default {
-    name: "DoctorCheckPatients",
+    name: "ChiefNurseCheckPatients",
     data() {
       return {
         selectRange:{
@@ -108,7 +108,7 @@
       this.getAllPatients();
     },methods:{
       getAllPatients(){
-        this.$axios.post('/doctor/getPatientInfo',
+        this.$axios.post('/chiefNurse/getPatientInfo',
           this.$store.state.username
         ).then(resp => {
           this.tableData=resp.data
@@ -119,7 +119,7 @@
           })
       },
       getPatients(){
-        this.$axios.post('/doctor/getPatients',{
+        this.$axios.post('/chiefNurse/select',{
           username:this.$store.state.username,
           type:this.selectRange.value[0],
           value:this.selectRange.value[1]

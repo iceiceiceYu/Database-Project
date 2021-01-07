@@ -56,10 +56,6 @@
         <i class="el-icon-menu"></i>
         <span slot="title">登记入院信息</span>
       </el-menu-item>
-      <el-menu-item index="3" >
-        <i class="el-icon-document"></i>
-        <span slot="title">新增核酸检测</span>
-      </el-menu-item>
 
     </div>
 
@@ -83,17 +79,46 @@
             if(this.type==='doctor'){
               switch (key) {
                 case '1':
-                  this.$router.replace({path: '/checkPatients'})
+                  this.$router.replace({path: '/doctor/checkPatients'})
                   break;
                 case '2':
-                  this.$router.replace({path: '/checkStaff'})
+                  this.$router.replace({path: '/doctor/checkStaff'})
                   break;
                 case '3':
-                  this.$router.replace({path: '/newReport'})
+                  this.$router.replace({path: '/doctor/newReport'})
+                  break;
+              }
+            }else if(this.type==='chief nurse'){
+              switch (key) {
+                case '1':
+                  this.$router.replace({path: '/chiefNurse/checkPatients'})
+                  break;
+                case '2':
+                  this.$router.replace({path: '/chiefNurse/checkStaff'})
+                  break;
+                case '3':
+                  this.$router.replace({path: '/chiefNurse/checkWard'})
+                  break;
+              }
+            }else if(this.type==='ward nurse'){
+              switch (key) {
+                case '1':
+                  this.$router.replace({path: '/wardNurse/checkPatients'})
+                  break;
+                case '2':
+                  this.$router.replace({path: '/wardNurse/dailyInfo'})
+                  break;
+              }
+            }else if(this.type==='emergency nurse'){
+              switch (key) {
+                case '1':
+                  this.$router.replace({path: '/emergencyNurse/checkPatients'})
+                  break;
+                case '2':
+                  this.$router.replace({path: '/emergencyNurse/checkIn'})
                   break;
               }
             }
-
           },
 
       }
