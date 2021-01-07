@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class DoctorService {
@@ -105,28 +103,36 @@ public class DoctorService {
         return (List<Staff>) staffRepository.findStaffBySectionAndType(section, "chief nurse");
     }
 
-    public Map<Staff, String> wardNurse(String doctorUsername) {
+    public List<Staff> wardNurse(String doctorUsername) {
+        Staff doctor = staffRepository.findStaffByUsername(doctorUsername);
+        String section = doctor.getSection();
+
+        return (List<Staff>) staffRepository.findStaffBySectionAndType(section, "ward nurse");
+    }
+
+    public List<String> patientsOfNurse(String doctorUsername) {
         Staff doctor = staffRepository.findStaffByUsername(doctorUsername);
         String section = doctor.getSection();
 
         List<Staff> staff = (List<Staff>) staffRepository.findStaffBySectionAndType(section, "ward nurse");
         List<Patient> patients = (List<Patient>) patientRepository.findPatientBySection(section);
 
-        Map<Staff, String> staffPatientMap = new HashMap<>();
+        List<String> patientsOfNurse = new ArrayList<>();
         for (Staff wardNurse : staff) {
-            staffPatientMap.put(wardNurse, searchPatient(wardNurse, patients));
+            patientsOfNurse.add(searchPatient(wardNurse, patients));
         }
-        return staffPatientMap;
+        return patientsOfNurse;
     }
 
     private String searchPatient(Staff staff, List<Patient> patients) {
         StringBuilder sb = new StringBuilder();
         String wardNurse = staff.getUsername();
         for (Patient patient : patients) {
-            if (patient.getWardNurse().equals(wardNurse)){
+            if (patient.getWardNurse().equals(wardNurse)) {
                 sb.append(patient.getName()).append(" ");
             }
         }
+        System.out.println(sb.toString());
         return sb.toString();
     }
 

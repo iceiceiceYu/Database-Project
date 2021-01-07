@@ -19,6 +19,7 @@ public class Patient {
     private String level; // mild, severe, critical
     private String section; // mild, severe, critical
     private String wardNurse;
+    private String wardName;
     private int sickBed;
     private int status; // 1: 康复出院, 0: 在院治疗, -1: 病亡
 
@@ -26,13 +27,14 @@ public class Patient {
 
     }
 
-    public Patient(String name, String gender, int age, String level, String section, String wardNurse, int sickBed, int status) {
+    public Patient(String name, String gender, int age, String level, String section, String wardNurse, String wardName, int sickBed, int status) {
         this.name = name;
         this.gender = gender;
         this.age = age;
         this.level = level;
         this.section = section;
         this.wardNurse = wardNurse;
+        this.wardName = wardName;
         this.sickBed = sickBed;
         this.status = status;
     }
@@ -105,6 +107,16 @@ public class Patient {
     @Setter
     public void setWardNurse(String wardNurse) {
         this.wardNurse = wardNurse;
+    }
+
+    @Getter
+    public String getWardName() {
+        return wardName;
+    }
+
+    @Setter
+    public void setWardName(String wardName) {
+        this.wardName = wardName;
     }
 
     @Getter
