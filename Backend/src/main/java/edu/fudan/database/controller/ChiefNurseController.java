@@ -58,7 +58,7 @@ public class ChiefNurseController {
     }
 
     @PostMapping("/chiefNurse/searchBackupWard")
-    public ResponseEntity<List<Staff>> searchBackupWard() {
-        return ResponseEntity.ok(chiefNurseService.searchBackupWard());
+    public ResponseEntity<List<Staff>> searchBackupWard(@RequestBody String chiefNurseUsername) {
+        return ResponseEntity.ok(chiefNurseService.searchBackupWard(chiefNurseUsername));
     }
 }

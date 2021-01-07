@@ -1,5 +1,6 @@
 package edu.fudan.database.service;
 
+import edu.fudan.database.domain.DailyInfo;
 import edu.fudan.database.domain.Patient;
 import edu.fudan.database.domain.Staff;
 import edu.fudan.database.repository.*;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Service
 public class WardNurseService {
+    private final DailyInfoRepository dailyInfoRepository;
     private final PatientRepository patientRepository;
     private final ReportRepository reportRepository;
     private final SectionRepository sectionRepository;
@@ -18,11 +20,13 @@ public class WardNurseService {
     private final WardRepository wardRepository;
 
     @Autowired
-    public WardNurseService(PatientRepository patientRepository,
+    public WardNurseService(DailyInfoRepository dailyInfoRepository,
+                            PatientRepository patientRepository,
                             ReportRepository reportRepository,
                             SectionRepository sectionRepository,
                             StaffRepository staffRepository,
                             WardRepository wardRepository) {
+        this.dailyInfoRepository = dailyInfoRepository;
         this.patientRepository = patientRepository;
         this.reportRepository = reportRepository;
         this.sectionRepository = sectionRepository;
@@ -96,5 +100,11 @@ public class WardNurseService {
 //            }
 //        }
         return selectedPatients;
+    }
+
+    public DailyInfo dailyInfo(Long patientId, String patientName, double temperature, String symptom, boolean positive, String date, String wardNurse) {
+        DailyInfo dailyInfo = new DailyInfo(patientId, patientName, temperature, symptom, positive, date, wardNurse);
+        dailyInfoRepository.save(dailyInfo);
+        return dailyInfo;
     }
 }

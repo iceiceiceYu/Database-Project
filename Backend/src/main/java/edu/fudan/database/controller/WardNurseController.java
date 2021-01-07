@@ -37,6 +37,10 @@ public class WardNurseController {
 
     @PostMapping("/wardNurse/dailyInfo")
     public ResponseEntity<DailyInfo> dailyInfo(@RequestBody DailyInfoRequest dailyInfoRequest) {
-        return null;
+        return ResponseEntity.ok(wardNurseService.dailyInfo(
+                dailyInfoRequest.getPatientId(), dailyInfoRequest.getPatientName(),
+                dailyInfoRequest.getTemperature(), dailyInfoRequest.getSymptom(),
+                dailyInfoRequest.isPositive(), dailyInfoRequest.getDate(),
+                dailyInfoRequest.getWardNurse()));
     }
 }

@@ -180,7 +180,7 @@ public class ChiefNurseService {
         return "success";
     }
 
-    public List<Staff> searchBackupWard() {
+    public List<Staff> searchBackupWard(String chiefNurseUsername) {
         return (List<Staff>) staffRepository.findStaffBySectionAndType("backup", "ward nurse");
     }
 }
