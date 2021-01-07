@@ -9,7 +9,7 @@
       </el-aside>
       <el-main>
         <h1>核酸检测单</h1>
-        <el-form class="login-container" :model="report" ref="report"
+        <el-form :model="report" ref="report"
                  :rules="rules" label-width="80px">
           <el-form-item label="病人姓名">
             <el-input type="text" v-model="report.name" disabled></el-input>
@@ -114,11 +114,7 @@
               level: this.report.level,
               date:this.report.date,
             }).then(resp => {
-              if (resp.data === 'success') {
                 alert('添加成功')
-              } else {
-                alert('添加失败')
-              }
             })
               .catch(error => {
                 console.log(error);

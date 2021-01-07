@@ -38,6 +38,18 @@
             label="姓名">
           </el-table-column>
           <el-table-column
+            prop="gender"
+            label="性别">
+            <template slot-scope="scope">
+              <span v-if="scope.row.gender==='male'">男</span>
+              <span v-else-if="scope.row.gender==='female'">女</span>
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="age"
+            label="年龄">
+          </el-table-column>
+          <el-table-column
             prop="level"
             label="病情等级">
             <template slot-scope="scope">
@@ -60,11 +72,17 @@
             label="病床">
           </el-table-column>
           <el-table-column
-            prop="alive"
+            prop="status"
             label="生存状态">
             <template slot-scope="scope">
-              <span v-if="scope.row.alive">正常</span>
-              <span v-else>死亡</span>
+              <span v-if="scope.row.status===1">康复出院</span>
+              <span v-else-if="scope.row.status===0">在院治疗</span>
+              <span v-else-if="scope.row.status===-1">死亡</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="操作">
+            <template slot-scope="scope">
+              <el-button v-if="scope.row.status===0" size="mini" type="primary" @click="dailyInfo(scope.row)">登记信息</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -150,6 +168,13 @@
             console.log(error);
             alert('网络连接失败')
           })
+      },dailyInfo(row){
+        this.$router.push({
+          path: '/wardNurse/dailyInfo',
+          query: {
+            patient: row
+          }
+        })
       }
     }
 

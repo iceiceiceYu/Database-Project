@@ -82,11 +82,12 @@
           </el-table-column>
           <el-table-column  label="操作" width="500" fixed="right">
             <template slot-scope="scope">
+              <div v-if="scope.row.status===0">
               <el-button size="mini" type="primary" @click="transLevel(scope.row)">提交病情评级修改</el-button>
               <el-button size="mini" @click="addReports(scope.row)">添加核酸检测单</el-button>
               <el-button size="mini" @click="transLive(scope.row)">更改生命状态</el-button>
               <el-button size="mini" v-if="section ==='mild'" @click="discharge(scope.row)">出院</el-button>
-
+              </div>
             </template>
           </el-table-column>
         </el-table>
@@ -193,11 +194,7 @@
           patientId: this.selectionPatient.id,
           newLevel: row.level
         }).then(resp => {
-          if (resp.data === 'success') {
             alert('添加成功')
-          } else {
-            alert('添加失败')
-          }
         })
           .catch(error => {
             console.log(error);
@@ -205,14 +202,10 @@
           })
       }, transLive(row) {
         this.selectionPatient = row
-        this.$axios.post('/doctor/modifyAlive', {
-          patientId: this.selectionPatient.id,
-        }).then(resp => {
-          if (resp.data === 'success') {
+        this.$axios.post('/doctor/modifyAlive',
+         this.selectionPatient.id,
+        ).then(resp => {
             alert('添加成功')
-          } else {
-            alert('添加失败')
-          }
         })
           .catch(error => {
             console.log(error);
@@ -220,14 +213,10 @@
           })
       },discharge(row){
         this.selectionPatient = row
-        this.$axios.post('/doctor/discharge', {
-          patientId: this.selectionPatient.id,
-        }).then(resp => {
-          if (resp.data === 'success') {
+        this.$axios.post('/doctor/discharge',
+          this.selectionPatient.id,
+        ).then(resp => {
             alert('添加成功')
-          } else {
-            alert('添加失败')
-          }
         })
           .catch(error => {
             console.log(error);
