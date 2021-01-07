@@ -116,6 +116,7 @@ public class DoctorService {
         for (Staff wardNurse : staff) {
             staffPatientMap.put(wardNurse, searchPatient(wardNurse, patients));
         }
+        System.out.println(staffPatientMap);
         return staffPatientMap;
     }
 
