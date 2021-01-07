@@ -1,7 +1,10 @@
 package edu.fudan.database.controller;
 
 import edu.fudan.database.controller.request.SelectRequest;
+import edu.fudan.database.controller.request.doctor.ModifyLevelRequest;
+import edu.fudan.database.controller.request.doctor.TestRequest;
 import edu.fudan.database.domain.Patient;
+import edu.fudan.database.domain.Report;
 import edu.fudan.database.domain.Staff;
 import edu.fudan.database.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +19,7 @@ import java.util.List;
 @RestController
 @CrossOrigin
 public class DoctorController {
-    private DoctorService doctorService;
+    private final DoctorService doctorService;
 
     @Autowired
     public DoctorController(DoctorService doctorService) {
@@ -31,7 +34,7 @@ public class DoctorController {
     @PostMapping("/doctor/select")
     public ResponseEntity<List<Patient>> select(@RequestBody SelectRequest selectRequest) {
         return ResponseEntity.ok(doctorService.select(
-                selectRequest.getUsername(), selectRequest.getType(), selectRequest.getUsername()));
+                selectRequest.getUsername(), selectRequest.getType(), selectRequest.getType()));
     }
 
     @PostMapping("/doctor/chiefNurse")
@@ -42,5 +45,27 @@ public class DoctorController {
     @PostMapping("/doctor/wardNurse")
     public ResponseEntity<List<Staff>> wardNurse(@RequestBody String doctorUsername) {
         return ResponseEntity.ok(doctorService.wardNurse(doctorUsername));
+    }
+
+    @PostMapping("/doctor/modifyLevel")
+    public ResponseEntity<Patient> modifyLevel(@RequestBody ModifyLevelRequest modifyLevelRequest) {
+        return ResponseEntity.ok(doctorService.modifyLevel(modifyLevelRequest.getPatientId(), modifyLevelRequest.getNewLevel()));
+    }
+
+    @PostMapping("/doctor/modifyAlive")
+    public ResponseEntity<Patient> modifyAlive(@RequestBody Long patientId) {
+        return ResponseEntity.ok(doctorService.modifyAlive(patientId));
+    }
+
+    @PostMapping("/doctor/addReport")
+    public ResponseEntity<Report> addReport(@RequestBody TestRequest testRequest) {
+        return ResponseEntity.ok(doctorService.addReport(
+                testRequest.getPatientId(), testRequest.getPatientName(), testRequest.isPositive(),
+                testRequest.getLevel(), testRequest.getDate(), testRequest.getDoctor()));
+    }
+
+    @PostMapping("/discharge")
+    public ResponseEntity<Patient> discharge(@RequestBody Long patientId) {
+        return ResponseEntity.ok(doctorService.discharge(patientId));
     }
 }

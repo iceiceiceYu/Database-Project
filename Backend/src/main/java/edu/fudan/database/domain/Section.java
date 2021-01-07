@@ -16,6 +16,9 @@ public class Section {
     @ElementCollection
     private Set<String> wardNurse;
 
+    @ElementCollection
+    private Set<String> ward;
+
     public Section() {
 
     }

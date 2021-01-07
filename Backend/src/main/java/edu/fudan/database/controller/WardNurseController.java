@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 @CrossOrigin
 public class WardNurseController {
-    private WardNurseService wardNurseService;
+    private final WardNurseService wardNurseService;
 
     @Autowired
     public WardNurseController(WardNurseService wardNurseService) {
@@ -31,6 +31,6 @@ public class WardNurseController {
     @PostMapping("/wardNurse/select")
     public ResponseEntity<List<Patient>> select(@RequestBody SelectRequest selectRequest) {
         return ResponseEntity.ok(wardNurseService.select(
-                selectRequest.getUsername(), selectRequest.getType(), selectRequest.getUsername()));
+                selectRequest.getUsername(), selectRequest.getType(), selectRequest.getType()));
     }
 }

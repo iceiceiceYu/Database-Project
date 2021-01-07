@@ -20,14 +20,13 @@ public class Patient {
     private String section; // mild, severe, critical
     private String wardNurse;
     private int sickBed;
-    private boolean alive;
-    private boolean discharge;
+    private int status; // 1: 康复出院, 0: 在院治疗, -1: 病亡
 
     public Patient() {
 
     }
 
-    public Patient(String name, String gender, int age, String level, String section, String wardNurse, int sickBed, boolean alive, boolean discharge) {
+    public Patient(String name, String gender, int age, String level, String section, String wardNurse, int sickBed, int status) {
         this.name = name;
         this.gender = gender;
         this.age = age;
@@ -35,8 +34,7 @@ public class Patient {
         this.section = section;
         this.wardNurse = wardNurse;
         this.sickBed = sickBed;
-        this.alive = alive;
-        this.discharge = discharge;
+        this.status = status;
     }
 
     @Getter
@@ -120,22 +118,12 @@ public class Patient {
     }
 
     @Getter
-    public boolean isAlive() {
-        return alive;
+    public int getStatus() {
+        return status;
     }
 
     @Setter
-    public void setAlive(boolean alive) {
-        this.alive = alive;
-    }
-
-    @Getter
-    public boolean isDischarge() {
-        return discharge;
-    }
-
-    @Setter
-    public void setDischarge(boolean discharge) {
-        this.discharge = discharge;
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

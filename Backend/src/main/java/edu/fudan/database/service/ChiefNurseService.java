@@ -11,11 +11,11 @@ import java.util.List;
 
 @Service
 public class ChiefNurseService {
-    private PatientRepository patientRepository;
-    private ReportRepository reportRepository;
-    private SectionRepository sectionRepository;
-    private StaffRepository staffRepository;
-    private WardRepository wardRepository;
+    private final PatientRepository patientRepository;
+    private final ReportRepository reportRepository;
+    private final SectionRepository sectionRepository;
+    private final StaffRepository staffRepository;
+    private final WardRepository wardRepository;
 
     @Autowired
     public ChiefNurseService(PatientRepository patientRepository,
@@ -86,11 +86,12 @@ public class ChiefNurseService {
 
     private List<Patient> isAlive(List<Patient> patients) {
         List<Patient> selectedPatients = new ArrayList<>();
-        for (Patient patient : patients) {
-            if (patient.isAlive()) {
-                selectedPatients.add(patient);
-            }
-        }
+        // TODO
+//        for (Patient patient : patients) {
+//            if (patient.isAlive()) {
+//                selectedPatients.add(patient);
+//            }
+//        }
         return selectedPatients;
     }
 
