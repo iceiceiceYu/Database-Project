@@ -12,13 +12,9 @@
         <i class="el-icon-menu"></i>
         <span slot="title">我的病区</span>
       </el-menu-item>
-      <el-menu-item index="3" >
+      <el-menu-item index="3" disabled>
         <i class="el-icon-document"></i>
         <span slot="title">新增核酸检测</span>
-      </el-menu-item>
-      <el-menu-item index="4">
-        <i class="el-icon-setting"></i>
-        <span slot="title">导航四</span>
       </el-menu-item>
     </div>
     <div v-else-if="type === 'chief nurse'">

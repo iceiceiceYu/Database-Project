@@ -14,6 +14,7 @@
             <el-table :data="chiefNurse"
                       stripe
                       style="width: 100%">
+
               <el-table-column
                 prop="id"
                 label="ID"
@@ -46,9 +47,10 @@
                 prop="birth"
                 label="出生年月">
               </el-table-column>
-              <el-table-column
-                prop="responsible"
-                label="负责的病人">
+              <el-table-column label="负责的病人">
+                <template slot-scope="scope">
+                  {{patientsOfNurse[scope.$index]}}
+                </template>
               </el-table-column>
             </el-table>
           </el-collapse-item>
@@ -70,18 +72,25 @@
           name: 'A',
           birth: '1999-01-01'
         }],
-        wardNurse: [{
-          id: 1,
-          name: 'A',
-          birth: '1999-01-01',
-          responsible: []
-        }]
+        wardNurse: [],
+        patientsOfNurse:[]
       }
     }, created() {
       this.$axios.post('/doctor/wardNurse',
         this.$store.state.username
       ).then(resp => {
-        this.wardNurse = resp.data
+        this.wardNurse=resp.data
+      })
+        .catch(error => {
+          console.log(error);
+          alert('网络连接失败')
+        })
+
+      this.$axios.post('/doctor/patientsOfNurse',
+        this.$store.state.username
+      ).then(resp => {
+        this.patientsOfNurse=resp.data
+        console.log(this.patientsOfNurse)
       })
         .catch(error => {
           console.log(error);

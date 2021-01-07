@@ -121,6 +121,7 @@ public class DoctorService {
         for (Staff wardNurse : staff) {
             patientsOfNurse.add(searchPatient(wardNurse, patients));
         }
+
         return patientsOfNurse;
     }
 
