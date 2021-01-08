@@ -157,7 +157,7 @@ public class WardNurseService {
     }
 
     public DailyInfo dailyInfo(Long patientId, String patientName, double temperature, String symptom, boolean positive, String date, String wardNurse) {
-        DailyInfo dailyInfo = new DailyInfo(patientId, patientName, temperature, symptom, positive, date, wardNurse);
+        DailyInfo dailyInfo = new DailyInfo(patientId, patientName, temperature, symptom, positive, date.substring(0, 10), wardNurse);
         dailyInfoRepository.save(dailyInfo);
         if (SystemService.testDischarge(patientRepository.findPatientById(patientId))) {
             String sectionName = staffRepository.findStaffByUsername(wardNurse).getSection();
