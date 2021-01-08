@@ -21,18 +21,18 @@ public class Ward {
     private Set<String> patients;
 
     @ElementCollection
-    private Set<Integer> sickBeds;
+    private Set<Integer> sickbeds;
 
     public Ward() {
 
     }
 
-    public Ward(String level, String name, int capacity, Set<String> patients, Set<Integer> sickBeds) {
+    public Ward(String level, String name, int capacity, Set<String> patients, Set<Integer> sickbeds) {
         this.level = level;
         this.name = name;
         this.capacity = capacity;
         this.patients = patients;
-        this.sickBeds = sickBeds;
+        this.sickbeds = sickbeds;
     }
 
     @Getter
@@ -86,12 +86,12 @@ public class Ward {
     }
 
     @Getter
-    public Set<Integer> getSickBeds() {
-        return sickBeds;
+    public Set<Integer> getSickbeds() {
+        return sickbeds;
     }
 
     @Setter
-    public void setSickBeds(Set<Integer> sickBeds) {
-        this.sickBeds = sickBeds;
+    public void setSickbeds(Set<Integer> sickBeds) {
+        this.sickbeds = sickBeds;
     }
 }

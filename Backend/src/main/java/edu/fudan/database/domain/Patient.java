@@ -21,7 +21,7 @@ public class Patient {
     private String section; // mild, severe, critical
     private String wardNurse;
     private String wardName;
-    private int sickBed;
+    private int sickbed;
     private int status; // 1: 康复出院, 0: 在院治疗, -1: 病亡
 
     public Patient() {
@@ -35,7 +35,7 @@ public class Patient {
         this.level = level;
     }
 
-    public Patient(String name, String gender, int age, String level, boolean quarantined, String section, String wardNurse, String wardName, int sickBed, int status) {
+    public Patient(String name, String gender, int age, String level, boolean quarantined, String section, String wardNurse, String wardName, int sickbed, int status) {
         this.name = name;
         this.gender = gender;
         this.age = age;
@@ -44,7 +44,7 @@ public class Patient {
         this.section = section;
         this.wardNurse = wardNurse;
         this.wardName = wardName;
-        this.sickBed = sickBed;
+        this.sickbed = sickbed;
         this.status = status;
     }
 
@@ -139,13 +139,13 @@ public class Patient {
     }
 
     @Getter
-    public int getSickBed() {
-        return sickBed;
+    public int getSickbed() {
+        return sickbed;
     }
 
     @Setter
-    public void setSickBed(int sickBed) {
-        this.sickBed = sickBed;
+    public void setSickbed(int sickBed) {
+        this.sickbed = sickBed;
     }
 
     @Getter

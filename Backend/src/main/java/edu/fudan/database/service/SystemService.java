@@ -90,13 +90,13 @@ public class SystemService {
                     patient.setWardName(wardName);
                     Ward ward = wardRepository.findWardByName(wardName);
                     Set<String> currPatients = ward.getPatients();
-                    Set<Integer> sickBeds = ward.getSickBeds();
+                    Set<Integer> sickBeds = ward.getSickbeds();
 
                     for (int i = 1; i <= wardCapacity; i++) {
                         if (!sickBeds.contains(i)) {
                             sickBeds.add(i);
                             currPatients.add(patient.getName());
-                            patient.setSickBed(i);
+                            patient.setSickbed(i);
                             break Loop;
                         }
                     }
