@@ -140,7 +140,6 @@ public class SystemService {
         String name = patient.getName();
         int sickbed = patient.getSickbed();
         String sectionName = patient.getSection();
-
         Section section = sectionRepository.findSectionByLevel(sectionName);
         List<String> wards = section.getWards();
 
@@ -162,6 +161,8 @@ public class SystemService {
         patient.setSickbed(0);
         patientRepository.save(patient);
 
+        SystemService.arrangePatient(patient);
+
         if (cascade) {
             List<Patient> quarantinedPatients = (List<Patient>) patientRepository.findPatientByLevelAndQuarantined(sectionName, true);
             if (quarantinedPatients.size() > 0) {
@@ -173,8 +174,6 @@ public class SystemService {
                 }
             }
         }
-
-        SystemService.arrangePatient(patient);
     }
 
     public static List<Patient> canTransPatient(String section) {

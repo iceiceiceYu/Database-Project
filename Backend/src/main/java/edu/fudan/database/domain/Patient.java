@@ -35,6 +35,14 @@ public class Patient {
         this.level = level;
     }
 
+    public Patient(String name, String gender, int age, String level, boolean quarantined) {
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
+        this.level = level;
+        this.quarantined = quarantined;
+    }
+
     public Patient(String name, String gender, int age, String level, boolean quarantined, String section, String wardNurse, String wardName, int sickbed, int status) {
         this.name = name;
         this.gender = gender;

@@ -12,9 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @SpringBootApplication
 public class DatabaseProjectApplication {
@@ -42,38 +40,38 @@ public class DatabaseProjectApplication {
                 List<String> mWardNurse = new ArrayList<>();
                 mWardNurse.add("mWard1");
                 mWardNurse.add("mWard2");
-                mWardNurse.add("mWard3");
-                mWardNurse.add("mWard4");
+//                mWardNurse.add("mWard3");
+//                mWardNurse.add("mWard4");
                 List<String> sWardNurse = new ArrayList<>();
                 sWardNurse.add("sWard1");
-                sWardNurse.add("sWard2");
-                sWardNurse.add("sWard3");
+//                sWardNurse.add("sWard2");
+//                sWardNurse.add("sWard3");
                 List<String> cWardNurse = new ArrayList<>();
                 cWardNurse.add("cWard1");
-                cWardNurse.add("cWard2");
-                cWardNurse.add("cWard3");
+//                cWardNurse.add("cWard2");
+//                cWardNurse.add("cWard3");
 
                 List<String> mWard = new ArrayList<>();
                 mWard.add("轻症病房1");
                 mWard.add("轻症病房2");
                 mWard.add("轻症病房3");
-                mWard.add("轻症病房4");
-                mWard.add("轻症病房5");
-                mWard.add("轻症病房6");
+//                mWard.add("轻症病房4");
+//                mWard.add("轻症病房5");
+//                mWard.add("轻症病房6");
                 List<String> sWard = new ArrayList<>();
                 sWard.add("重症病房1");
                 sWard.add("重症病房2");
                 sWard.add("重症病房3");
-                sWard.add("重症病房4");
-                sWard.add("重症病房5");
-                sWard.add("重症病房6");
+//                sWard.add("重症病房4");
+//                sWard.add("重症病房5");
+//                sWard.add("重症病房6");
                 List<String> cWard = new ArrayList<>();
                 cWard.add("危重症病房1");
                 cWard.add("危重症病房2");
                 cWard.add("危重症病房3");
-                cWard.add("危重症病房4");
-                cWard.add("危重症病房5");
-                cWard.add("危重症病房6");
+//                cWard.add("危重症病房4");
+//                cWard.add("危重症病房5");
+//                cWard.add("危重症病房6");
 
                 Section mildSection = new Section("mild", "mDoctor", "mChief", mWardNurse, mWard);
                 sectionRepository.save(mildSection);
@@ -101,17 +99,19 @@ public class DatabaseProjectApplication {
                 wardRepository.save(mWard2);
                 Ward mWard3 = new Ward("mild", "轻症病房3", 4, new ArrayList<>(), new ArrayList<>());
                 wardRepository.save(mWard3);
-                Ward mWard4 = new Ward("mild", "轻症病房4", 4, new ArrayList<>(), new ArrayList<>());
-                wardRepository.save(mWard4);
-                Ward mWard5 = new Ward("mild", "轻症病房5", 4, new ArrayList<>(), new ArrayList<>());
-                wardRepository.save(mWard5);
-                Ward mWard6 = new Ward("mild", "轻症病房6", 4, new ArrayList<>(), new ArrayList<>());
-                wardRepository.save(mWard6);
+//                Ward mWard4 = new Ward("mild", "轻症病房4", 4, new ArrayList<>(), new ArrayList<>());
+//                wardRepository.save(mWard4);
+//                Ward mWard5 = new Ward("mild", "轻症病房5", 4, new ArrayList<>(), new ArrayList<>());
+//                wardRepository.save(mWard5);
+//                Ward mWard6 = new Ward("mild", "轻症病房6", 4, new ArrayList<>(), new ArrayList<>());
+//                wardRepository.save(mWard6);
 
                 List<String> sPatients = new ArrayList<>();
                 sPatients.add("重一");
+                sPatients.add("重二");
                 List<Integer> sSickbeds = new ArrayList<>();
                 sSickbeds.add(1);
+                sSickbeds.add(2);
 
                 Ward sWard1 = new Ward("severe", "重症病房1", 2, sPatients, sSickbeds);
                 wardRepository.save(sWard1);
@@ -119,15 +119,15 @@ public class DatabaseProjectApplication {
                 wardRepository.save(sWard2);
                 Ward sWard3 = new Ward("severe", "重症病房3", 2, new ArrayList<>(), new ArrayList<>());
                 wardRepository.save(sWard3);
-                Ward sWard4 = new Ward("severe", "重症病房4", 2, new ArrayList<>(), new ArrayList<>());
-                wardRepository.save(sWard4);
-                Ward sWard5 = new Ward("severe", "重症病房5", 2, new ArrayList<>(), new ArrayList<>());
-                wardRepository.save(sWard5);
-                Ward sWard6 = new Ward("severe", "重症病房6", 2, new ArrayList<>(), new ArrayList<>());
-                wardRepository.save(sWard6);
+//                Ward sWard4 = new Ward("severe", "重症病房4", 2, new ArrayList<>(), new ArrayList<>());
+//                wardRepository.save(sWard4);
+//                Ward sWard5 = new Ward("severe", "重症病房5", 2, new ArrayList<>(), new ArrayList<>());
+//                wardRepository.save(sWard5);
+//                Ward sWard6 = new Ward("severe", "重症病房6", 2, new ArrayList<>(), new ArrayList<>());
+//                wardRepository.save(sWard6);
 
                 List<String> cPatients = new ArrayList<>();
-                cPatients.add("危重一");
+                cPatients.add("危一");
                 List<Integer> cSickbeds = new ArrayList<>();
                 cSickbeds.add(1);
 
@@ -137,12 +137,12 @@ public class DatabaseProjectApplication {
                 wardRepository.save(cWard2);
                 Ward cWard3 = new Ward("severe", "危重症病房3", 1, new ArrayList<>(), new ArrayList<>());
                 wardRepository.save(cWard3);
-                Ward cWard4 = new Ward("severe", "危重症病房4", 1, new ArrayList<>(), new ArrayList<>());
-                wardRepository.save(cWard4);
-                Ward cWard5 = new Ward("severe", "危重症病房5", 1, new ArrayList<>(), new ArrayList<>());
-                wardRepository.save(cWard5);
-                Ward cWard6 = new Ward("severe", "危重症病房6", 1, new ArrayList<>(), new ArrayList<>());
-                wardRepository.save(cWard6);
+//                Ward cWard4 = new Ward("severe", "危重症病房4", 1, new ArrayList<>(), new ArrayList<>());
+//                wardRepository.save(cWard4);
+//                Ward cWard5 = new Ward("severe", "危重症病房5", 1, new ArrayList<>(), new ArrayList<>());
+//                wardRepository.save(cWard5);
+//                Ward cWard6 = new Ward("severe", "危重症病房6", 1, new ArrayList<>(), new ArrayList<>());
+//                wardRepository.save(cWard6);
             }
 
             private void StaffLoader(StaffRepository staffRepository) {
@@ -172,32 +172,32 @@ public class DatabaseProjectApplication {
                 Staff mWard2 = new Staff("mWard2", "123456",
                         "2000-01-01", "mWard2", "ward nurse", "mild");
                 staffRepository.save(mWard2);
-                Staff mWard3 = new Staff("mWard3", "123456",
-                        "2000-01-01", "mWard3", "ward nurse", "mild");
-                staffRepository.save(mWard3);
-                Staff mWard4 = new Staff("mWard4", "123456",
-                        "2000-01-01", "mWard4", "ward nurse", "mild");
-                staffRepository.save(mWard4);
+//                Staff mWard3 = new Staff("mWard3", "123456",
+//                        "2000-01-01", "mWard3", "ward nurse", "mild");
+//                staffRepository.save(mWard3);
+//                Staff mWard4 = new Staff("mWard4", "123456",
+//                        "2000-01-01", "mWard4", "ward nurse", "mild");
+//                staffRepository.save(mWard4);
 
                 Staff sWard1 = new Staff("sWard1", "123456",
                         "2000-01-01", "sWard1", "ward nurse", "severe");
                 staffRepository.save(sWard1);
-                Staff sWard2 = new Staff("sWard2", "123456",
-                        "2000-01-01", "sWard2", "ward nurse", "severe");
-                staffRepository.save(sWard2);
-                Staff sWard3 = new Staff("sWard3", "123456",
-                        "2000-01-01", "sWard3", "ward nurse", "severe");
-                staffRepository.save(sWard3);
+//                Staff sWard2 = new Staff("sWard2", "123456",
+//                        "2000-01-01", "sWard2", "ward nurse", "severe");
+//                staffRepository.save(sWard2);
+//                Staff sWard3 = new Staff("sWard3", "123456",
+//                        "2000-01-01", "sWard3", "ward nurse", "severe");
+//                staffRepository.save(sWard3);
 
                 Staff cWard1 = new Staff("cWard1", "123456",
                         "2000-01-01", "cWard1", "ward nurse", "critical");
                 staffRepository.save(cWard1);
-                Staff cWard2 = new Staff("cWard2", "123456",
-                        "2000-01-01", "cWard2", "ward nurse", "critical");
-                staffRepository.save(cWard2);
-                Staff cWard3 = new Staff("cWard3", "123456",
-                        "2000-01-01", "cWard3", "ward nurse", "critical");
-                staffRepository.save(cWard3);
+//                Staff cWard2 = new Staff("cWard2", "123456",
+//                        "2000-01-01", "cWard2", "ward nurse", "critical");
+//                staffRepository.save(cWard2);
+//                Staff cWard3 = new Staff("cWard3", "123456",
+//                        "2000-01-01", "cWard3", "ward nurse", "critical");
+//                staffRepository.save(cWard3);
 
                 Staff backupWard1 = new Staff("backupWard1", "123456",
                         "2000-02-02", "backupWard1", "ward nurse", "backup");
@@ -232,11 +232,17 @@ public class DatabaseProjectApplication {
                 patientRepository.save(patient3);
                 Patient patient4 = new Patient("赵六", "male", 28, "mild", false, "mild", "mWard2", "轻症病房1", 4, 0);
                 patientRepository.save(patient4);
-
                 Patient patient5 = new Patient("重一", "male", 24, "severe", false, "severe", "sWard1", "重症病房1", 1, 0);
                 patientRepository.save(patient5);
-                Patient patient6 = new Patient("危重一", "male", 30, "critical", false, "critical", "cWard1", "危重症病房1", 1, 0);
+                Patient patient6 = new Patient("重二", "female", 28, "severe", false, "severe", "sWard1", "重症病房1", 2, 0);
                 patientRepository.save(patient6);
+                Patient patient7 = new Patient("危一", "male", 30, "critical", false, "critical", "cWard1", "危重症病房1", 1, 0);
+                patientRepository.save(patient7);
+
+                Patient patient8 = new Patient("重三", "male", 30, "severe", true);
+                patientRepository.save(patient8);
+                Patient patient9 = new Patient("危二", "male", 30, "critical", true);
+                patientRepository.save(patient9);
             }
         };
     }
