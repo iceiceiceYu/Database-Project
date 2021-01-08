@@ -201,7 +201,7 @@ public class SystemService {
             // 检验核酸检测结果
             List<Report> reports = (List<Report>) reportRepository.findReportByPatientId(id);
             int reportSize = reports.size();
-            if (reportSize <= 2) {
+            if (reportSize < 2) {
                 return false;
             }
             Report last = reports.get(reportSize - 1);
@@ -240,7 +240,7 @@ public class SystemService {
             // 检验每日记录体温
             List<DailyInfo> dailyInfos = (List<DailyInfo>) dailyInfoRepository.findDailyInfoByPatientId(id);
             int infoSize = dailyInfos.size();
-            if (infoSize <= 3) {
+            if (infoSize < 3) {
                 return false;
             }
             for (int i = 1; i <= 3; i++) {
