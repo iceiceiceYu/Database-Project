@@ -168,7 +168,9 @@ public class DatabaseProjectApplication {
                         "2000-02-02", "backupWard6", "ward nurse", "backup");
                 staffRepository.save(backupWard6);
 
-                // TODO：添加急诊护士
+                Staff eNurse = new Staff("eNurse", "123456",
+                        "2000-03-03", "eNurse", "emergency nurse", null);
+                staffRepository.save(eNurse);
             }
 
             private void PatientLoader(PatientRepository patientRepository) {

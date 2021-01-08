@@ -1,9 +1,12 @@
 package edu.fudan.database.service;
 
 import edu.fudan.database.domain.Patient;
+import edu.fudan.database.domain.Staff;
 import edu.fudan.database.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class EmergencyNurseService {
@@ -31,5 +34,54 @@ public class EmergencyNurseService {
         return SystemService.arrangePatient(patient);
     }
 
+    public List<Patient> getPatientInfo(String emergencyNurseUsername) {
+        return (List<Patient>) patientRepository.findPatientByStatus(0);
+    }
 
+    public List<Patient> select(String emergencyNurseUsername, String type, String value) {
+        List<Patient> selectedPatients;
+        switch (type) {
+            case "section":
+                selectedPatients = whichSection(value);
+                break;
+            case "level":
+                selectedPatients = whichLevel(value);
+                break;
+            case "isWaiting":
+                selectedPatients = isAlive(value);
+                break;
+            case "live":
+                selectedPatients = isQuarantined(value);
+                break;
+            default:
+                return (List<Patient>) patientRepository.findPatientByStatus(0);
+        }
+        return selectedPatients;
+    }
+
+    private List<Patient> whichSection(String section) {
+        return (List<Patient>) patientRepository.findPatientBySection(section);
+    }
+
+    private List<Patient> whichLevel(String level) {
+        return (List<Patient>) patientRepository.findPatientByLevel(level);
+    }
+
+    private List<Patient> isQuarantined(String value) {
+        if (value.equals("true")) {
+            return (List<Patient>) patientRepository.findPatientByQuarantined(true);
+        } else {
+            return (List<Patient>) patientRepository.findPatientByQuarantined(false);
+        }
+    }
+
+    private List<Patient> isAlive(String value) {
+        if (value.equals("true")) {
+            List<Patient> patients = (List<Patient>) patientRepository.findPatientByStatus(0);
+            patients.addAll((List<Patient>) patientRepository.findPatientByStatus(1));
+            return patients;
+        } else {
+            return (List<Patient>) patientRepository.findPatientByStatus(-1);
+        }
+    }
 }
