@@ -197,6 +197,10 @@ public class DoctorService {
         Patient patient = patientRepository.findPatientById(patientId);
         patient.setLevel(newLevel);
         patientRepository.save(patient);
+
+        if (SystemService.canArrange(newLevel)) {
+            SystemService.transferPatient(patient, true);
+        }
         return patient;
     }
 
@@ -227,6 +231,16 @@ public class DoctorService {
         patient.setStatus(-1);
         patient.setSickbed(0);
         patientRepository.save(patient);
+
+        List<Patient> quarantinedPatients = (List<Patient>) patientRepository.findPatientByLevelAndQuarantined(sectionName, true);
+        if (quarantinedPatients.size() > 0) {
+            SystemService.arrangePatient(quarantinedPatients.get(0));
+        } else {
+            List<Patient> canTransPatients = SystemService.canTransPatient(sectionName);
+            if (canTransPatients.size() > 0) {
+                SystemService.transferPatient(canTransPatients.get(0), true);
+            }
+        }
         return patient;
     }
 
@@ -263,6 +277,16 @@ public class DoctorService {
         patient.setStatus(1);
         patient.setSickbed(0);
         patientRepository.save(patient);
+
+        List<Patient> quarantinedPatients = (List<Patient>) patientRepository.findPatientByLevelAndQuarantined(sectionName, true);
+        if (quarantinedPatients.size() > 0) {
+            SystemService.arrangePatient(quarantinedPatients.get(0));
+        } else {
+            List<Patient> canTransPatients = SystemService.canTransPatient(sectionName);
+            if (canTransPatients.size() > 0) {
+                SystemService.transferPatient(canTransPatients.get(0), true);
+            }
+        }
         return patient;
     }
 }

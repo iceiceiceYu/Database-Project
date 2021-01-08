@@ -12,6 +12,10 @@ public interface PatientRepository extends CrudRepository<Patient, Long> {
 
     Iterable<Patient> findPatientByQuarantined(boolean quarantined);
 
+    Iterable<Patient> findPatientByLevelAndQuarantined(String level, boolean quarantined);
+
+    Iterable<Patient> findPatientByLevelAndStatus(String level, int status);
+
     Iterable<Patient> findPatientByStatus(int status);
 
     Patient findPatientById(Long id);

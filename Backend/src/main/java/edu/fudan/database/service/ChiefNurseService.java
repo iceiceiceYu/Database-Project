@@ -198,7 +198,17 @@ public class ChiefNurseService {
         section.setWardNurses(wardNurses);
         sectionRepository.save(section);
 
-        // TODO: 安排病人
+        List<Patient> quarantinedPatients = (List<Patient>) patientRepository.findPatientByLevelAndQuarantined(sectionName, true);
+        List<Patient> canTransPatients = SystemService.canTransPatient(sectionName);
+        while (SystemService.canArrange(sectionName) && (quarantinedPatients.size() > 0 || canTransPatients.size() > 0)) {
+            if (quarantinedPatients.size() > 0) {
+                SystemService.arrangePatient(quarantinedPatients.get(0));
+                quarantinedPatients.remove(0);
+            } else {
+                SystemService.transferPatient(canTransPatients.get(0), true);
+                canTransPatients.remove(0);
+            }
+        }
         return staff;
     }
 
@@ -226,7 +236,11 @@ public class ChiefNurseService {
         staff.setSection("backup");
         staffRepository.save(staff);
 
-        // TODO: 安排病人
+        for (Patient patient : patients) {
+            if (patient.getWardNurse().equals(wardNurseUsername)) {
+                SystemService.transferPatient(patient, false);
+            }
+        }
         return "success";
     }
 
