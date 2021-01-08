@@ -10,17 +10,20 @@
       <el-main>
         <h1>病床管理</h1>
         <el-table
-          :data="bedData"
+          :data="wardData"
           stripe
           style="width: 100%">
           <el-table-column
-            prop="id"
-            label="ID"
-            width="50">
+            prop="wardName"
+            label="病房名">
           </el-table-column>
           <el-table-column
-            prop="name"
-            label="姓名">
+            prop="sickBed"
+            label="病床">
+          </el-table-column>
+          <el-table-column
+            prop="patient"
+            label="患者">
           </el-table-column>
         </el-table>
       </el-main>
@@ -33,11 +36,23 @@
         name: "ChiefNurseCheckWard",
       data(){
           return{
-            bedData:[{
+            wardData:[{
+              wardName:'病房1',
+              sickBed:'1',
+              patient:'zhang'
             }]
           }
       },created(){
-
+        this.$axios.post('/chiefNurse/getWardInfo',
+          this.$store.state.username
+        ).then(resp => {
+          console.log(resp.data)
+          this.wardData=resp.data
+        })
+          .catch(error => {
+            console.log(error);
+            alert('网络连接失败')
+          })
       },methods:{
 
       }

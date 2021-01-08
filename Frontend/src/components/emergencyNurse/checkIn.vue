@@ -63,7 +63,11 @@
               age: this.newPatient.age,
               level: this.newPatient.level
             }).then(resp => {
-              alert('修改成功')
+              if(resp.data==='success'){
+                alert('添加成功')
+              }else if(resp.data==='error'){
+                alert('添加成功，病人已进入隔离区等待。')
+              }
             })
               .catch(error => {
                 console.log(error);

@@ -70,10 +70,19 @@
           <el-table-column
             prop="wardName"
             label="病房">
+            <template slot-scope="scope">
+              <span v-if="scope.row.status !==0" >暂无</span>
+              <span v-else-if="scope.row.status ===0" >{{scope.row.wardName}}</span>
+            </template>
           </el-table-column>
           <el-table-column
             prop="sickbed"
             label="病床">
+            <template slot-scope="scope">
+              <span v-if="scope.row.status !==0">暂无</span>
+              <span v-else-if="scope.row.sickbed===0">等待分配</span>
+              <span v-else-if="scope.row.sickbed!==0">{{scope.row.sickbed}}号床</span>
+            </template>
           </el-table-column>
           <el-table-column
             prop="status"
