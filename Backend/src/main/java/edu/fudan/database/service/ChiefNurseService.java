@@ -14,6 +14,7 @@ import java.util.List;
 @Service
 public class ChiefNurseService {
     private final DailyInfoRepository dailyInfoRepository;
+    private final MessageRepository messageRepository;
     private final PatientRepository patientRepository;
     private final ReportRepository reportRepository;
     private final SectionRepository sectionRepository;
@@ -22,12 +23,14 @@ public class ChiefNurseService {
 
     @Autowired
     public ChiefNurseService(DailyInfoRepository dailyInfoRepository,
+                             MessageRepository messageRepository,
                              PatientRepository patientRepository,
                              ReportRepository reportRepository,
                              SectionRepository sectionRepository,
                              StaffRepository staffRepository,
                              WardRepository wardRepository) {
         this.dailyInfoRepository = dailyInfoRepository;
+        this.messageRepository = messageRepository;
         this.patientRepository = patientRepository;
         this.reportRepository = reportRepository;
         this.sectionRepository = sectionRepository;
@@ -305,5 +308,15 @@ public class ChiefNurseService {
         } else {
             return 1;
         }
+    }
+
+    public List<String> getMessage(String chiefNurseUsername) {
+        List<Message> messageList = (List<Message>) messageRepository.findMessageByStaffAndMessageType(chiefNurseUsername, 1);
+        List<String> messages = new ArrayList<>();
+
+        for (Message message : messageList) {
+            messages.add(message.getStaff() + " 护士长：病人 " + message.getPatientName() + " 已经转入您的治疗区域了");
+        }
+        return messages;
     }
 }

@@ -74,4 +74,9 @@ public class DoctorController {
     public ResponseEntity<String> discharge(@RequestBody Long patientId) {
         return ResponseEntity.ok(doctorService.discharge(patientId));
     }
+
+    @PostMapping("/doctor/getMessage")
+    public ResponseEntity<List<String>> getMessage(@RequestBody String doctorUsername) {
+        return ResponseEntity.ok(doctorService.getMessage(doctorUsername));
+    }
 }

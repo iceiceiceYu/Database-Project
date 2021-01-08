@@ -1,9 +1,6 @@
 package edu.fudan.database.service;
 
-import edu.fudan.database.domain.DailyInfo;
-import edu.fudan.database.domain.Patient;
-import edu.fudan.database.domain.Report;
-import edu.fudan.database.domain.Staff;
+import edu.fudan.database.domain.*;
 import edu.fudan.database.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -162,6 +159,11 @@ public class WardNurseService {
     public DailyInfo dailyInfo(Long patientId, String patientName, double temperature, String symptom, boolean positive, String date, String wardNurse) {
         DailyInfo dailyInfo = new DailyInfo(patientId, patientName, temperature, symptom, positive, date, wardNurse);
         dailyInfoRepository.save(dailyInfo);
+        if (SystemService.testDischarge(patientRepository.findPatientById(patientId))) {
+            String sectionName = staffRepository.findStaffByUsername(wardNurse).getSection();
+            Section section = sectionRepository.findSectionByLevel(sectionName);
+            SystemService.newMessage(section.getDoctor(), patientId, patientName, 2);
+        }
         return dailyInfo;
     }
 }

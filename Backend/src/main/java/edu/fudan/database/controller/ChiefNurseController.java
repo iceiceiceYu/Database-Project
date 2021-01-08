@@ -76,4 +76,9 @@ public class ChiefNurseController {
     public ResponseEntity<List<String>> patientInfo(@RequestBody String chiefNurseUsername) {
         return ResponseEntity.ok(chiefNurseService.patientInfo(chiefNurseUsername));
     }
+
+    @PostMapping("/chiefNurse/getMessage")
+    public ResponseEntity<List<String>> getMessage(@RequestBody String chiefNurseUsername) {
+        return ResponseEntity.ok(chiefNurseService.getMessage(chiefNurseUsername));
+    }
 }

@@ -1,13 +1,14 @@
 package edu.fudan.database.service;
 
-import edu.fudan.database.domain.Patient;
-import edu.fudan.database.domain.Section;
-import edu.fudan.database.domain.Ward;
+import edu.fudan.database.domain.*;
 import edu.fudan.database.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -20,6 +21,7 @@ public class SystemService {
     private static final int CRITICAL_WARD_CAPACITY = 1;
 
     private static DailyInfoRepository dailyInfoRepository;
+    private static MessageRepository messageRepository;
     private static PatientRepository patientRepository;
     private static ReportRepository reportRepository;
     private static SectionRepository sectionRepository;
@@ -28,12 +30,14 @@ public class SystemService {
 
     @Autowired
     public SystemService(DailyInfoRepository dailyInfoRepository,
+                         MessageRepository messageRepository,
                          PatientRepository patientRepository,
                          ReportRepository reportRepository,
                          SectionRepository sectionRepository,
                          StaffRepository staffRepository,
                          WardRepository wardRepository) {
         SystemService.dailyInfoRepository = dailyInfoRepository;
+        SystemService.messageRepository = messageRepository;
         SystemService.patientRepository = patientRepository;
         SystemService.reportRepository = reportRepository;
         SystemService.sectionRepository = sectionRepository;
@@ -106,6 +110,8 @@ public class SystemService {
                 }
             }
             patientRepository.save(patient);
+
+            SystemService.newMessage(section.getChiefNurse(), patient.getId(), patient.getName(), 1);
             return "success";
         } else {
             patient.setQuarantined(true);
@@ -181,5 +187,70 @@ public class SystemService {
             }
         }
         return selectedPatients;
+    }
+
+    public static void newMessage(String staff, Long patientId, String patientName, int messageType) {
+        Message message = new Message(staff, patientId, patientName, messageType);
+        messageRepository.save(message);
+    }
+
+    public static boolean testDischarge(Patient patient) {
+        if (patient.getLevel().equals("mild")) {
+            Long id = patient.getId();
+
+            // 检验核酸检测结果
+            List<Report> reports = (List<Report>) reportRepository.findReportByPatientId(id);
+            int reportSize = reports.size();
+            if (reportSize <= 2) {
+                return false;
+            }
+            Report last = reports.get(reportSize - 1);
+            Report nextToLast = reports.get(reportSize - 2);
+
+            Test:
+            if (last.isPositive() || nextToLast.isPositive()) {
+                return false;
+            } else { // 检验两次时间大于24小时
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                try {
+                    Date lastDate = sdf.parse(last.getDate());
+                    Date nextToLastDate = sdf.parse(nextToLast.getDate());
+                    double time = (double) lastDate.getTime() - nextToLastDate.getTime();
+                    if (time / (1000 * 60 * 60) <= 24) {
+                        for (int i = 3; i <= reportSize; i++) {
+                            nextToLast = reports.get(reportSize - i);
+                            if (nextToLast.isPositive()) {
+                                return false;
+                            } else {
+                                nextToLastDate = sdf.parse(nextToLast.getDate());
+                                time = (double) lastDate.getTime() - nextToLastDate.getTime();
+                                if (time / (1000 * 60 * 60) > 24) {
+                                    break Test;
+                                }
+                            }
+                        }
+                        return false;
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            // 检验每日记录体温
+            List<DailyInfo> dailyInfos = (List<DailyInfo>) dailyInfoRepository.findDailyInfoByPatientId(id);
+            int infoSize = dailyInfos.size();
+            if (infoSize <= 3) {
+                return false;
+            }
+            for (int i = 1; i <= 3; i++) {
+                if (dailyInfos.get(infoSize - i).getTemperature() >= 37.3) {
+                    return false;
+                }
+            }
+
+            return true;
+        } else {
+            return false;
+        }
     }
 }
