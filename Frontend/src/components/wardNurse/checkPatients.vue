@@ -68,6 +68,10 @@
             </template>
           </el-table-column>
           <el-table-column
+            prop="wardName"
+            label="病房">
+          </el-table-column>
+          <el-table-column
             prop="sickBed"
             label="病床">
           </el-table-column>

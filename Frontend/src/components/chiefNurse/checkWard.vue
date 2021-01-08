@@ -8,7 +8,21 @@
         <v-side :activeIndex="'3'"></v-side>
       </el-aside>
       <el-main>
-        <p>病床管理</p>
+        <h1>病床管理</h1>
+        <el-table
+          :data="bedData"
+          stripe
+          style="width: 100%">
+          <el-table-column
+            prop="id"
+            label="ID"
+            width="50">
+          </el-table-column>
+          <el-table-column
+            prop="name"
+            label="姓名">
+          </el-table-column>
+        </el-table>
       </el-main>
     </el-container>
   </el-container>
@@ -16,7 +30,17 @@
 
 <script>
     export default {
-        name: "ChiefNurseCheckWard"
+        name: "ChiefNurseCheckWard",
+      data(){
+          return{
+            bedData:[{
+            }]
+          }
+      },created(){
+
+      },methods:{
+
+      }
     }
 </script>
 

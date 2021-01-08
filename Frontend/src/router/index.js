@@ -7,9 +7,11 @@ import MyInfo from '@/components/MyInfo'
 import DoctorCheckPatients from '@/components/doctor/checkPatients'
 import DoctorCheckStaff from '@/components/doctor/checkStaff'
 import DoctorNewReport from '@/components/doctor/newReport'
+import DoctorNews from '@/components/doctor/news'
 import ChiefNurseCheckPatients from '@/components/chiefNurse/checkPatients'
 import ChiefNurseCheckStaff from '@/components/chiefNurse/checkStaff'
 import ChiefNurseCheckWard from '@/components/chiefNurse/checkWard'
+import ChiefNews from '@/components/chiefNurse/news'
 import WardNurseCheckPatients from '@/components/wardNurse/checkPatients'
 import DailyInfo from '@/components/wardNurse/dailyInfo'
 import EmergencyNurseCheckPatients from '@/components/emergencyNurse/checkPatients'
@@ -59,6 +61,10 @@ export default new Router({
       path:'/doctor/newReport',
       name:'DoctorNewReport',
       component:DoctorNewReport
+    },{
+      path:'/doctor/news',
+      name:'DoctorNews',
+      component:DoctorNews
     },
     {
       path:'/chiefNurse/checkPatients',
@@ -74,6 +80,10 @@ export default new Router({
       path:'/chiefNurse/checkWard',
       name:'ChiefNurseCheckWard',
       component:ChiefNurseCheckWard
+    }, {
+      path:'/chiefNurse/news',
+      name:'ChiefNews',
+      component:ChiefNews
     },{
       path:'/wardNurse/checkPatients',
       name:'WardNurseCheckPatients',

@@ -51,25 +51,39 @@
             label="病情等级"
           width="100">
             <template slot-scope="scope">
-              <el-select v-model="scope.row.level" placeholder="请选择">
+              <el-select v-if="scope.row.status===0" v-model="scope.row.level" >
                 <el-option label="轻症" value="mild"></el-option>
                 <el-option label="重症" value="severe"></el-option>
                 <el-option label="危重症" value="critical"></el-option>
               </el-select>
+              <div v-else>暂无</div>
             </template>
           </el-table-column>
           <el-table-column
             prop="section"
             label="所属病区">
             <template slot-scope="scope">
+              <span v-if="scope.row.status !==0">暂无</span>
+              <span v-else>
               <span v-if="scope.row.section==='mild'">轻症区</span>
               <span v-else-if="scope.row.section==='severe'">重症区</span>
               <span v-else-if="scope.row.section==='critical'">危重症区</span>
+                </span>
             </template>
+          </el-table-column>
+          <el-table-column
+            prop="wardName"
+            label="病房"
+          width="100">
           </el-table-column>
           <el-table-column
             prop="sickBed"
             label="病床">
+            <template slot-scope="scope">
+              <span v-if="scope.row.status !==0">暂无</span>
+              <span v-else>{{scope.row.sickBed}}
+              </span>
+            </template>
           </el-table-column>
           <el-table-column
             prop="status"
@@ -194,7 +208,10 @@
           patientId: this.selectionPatient.id,
           newLevel: row.level
         }).then(resp => {
-            alert('添加成功')
+          this.$notify({
+            title: '修改病情评级成功',
+            type: 'success'
+          });
         })
           .catch(error => {
             console.log(error);
@@ -205,7 +222,10 @@
         this.$axios.post('/doctor/modifyAlive',
          this.selectionPatient.id,
         ).then(resp => {
-            alert('添加成功')
+          this.$notify({
+            title: '修改成功',
+            type: 'success'
+          });
         })
           .catch(error => {
             console.log(error);
@@ -216,7 +236,10 @@
         this.$axios.post('/doctor/discharge',
           this.selectionPatient.id,
         ).then(resp => {
-            alert('添加成功')
+          this.$notify({
+            title: '病人已成功出院',
+            type: 'success'
+          });
         })
           .catch(error => {
             console.log(error);

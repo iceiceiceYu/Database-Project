@@ -82,14 +82,15 @@
           }]
         },
         rules:{
-          date:[{required:true, message: '请选择正确的日期', trigger: 'blur'}]
+          date:[{required:true, message: '请选择正确的日期', trigger: 'blur'}],
+          level:[{required:true, message: '请选择正确的等级', trigger: 'blur'}]
         },
         report: {
           name: '1',
           gender:'male',
           age:32,
           positive:true,
-          level: 'mild',
+          level: '',
           date:'',
         }
       }

@@ -16,6 +16,11 @@
         <i class="el-icon-document"></i>
         <span slot="title">新增核酸检测</span>
       </el-menu-item>
+      <el-menu-item index="4" >
+        <i class="el-icon-info"></i>
+        <span slot="title">新消息</span>
+      </el-menu-item>
+
     </div>
     <div v-else-if="type === 'chief nurse'">
       <el-menu-item index="1">
@@ -30,6 +35,11 @@
         <i class="el-icon-document"></i>
         <span slot="title">管理病床</span>
       </el-menu-item>
+      <el-menu-item index="4" >
+        <i class="el-icon-info"></i>
+        <span slot="title">新消息</span>
+      </el-menu-item>
+
 
     </div>
     <div v-else-if="type === 'ward nurse'">
@@ -37,9 +47,9 @@
         <i class="el-icon-location"></i>
         <span>管理病人</span>
       </el-menu-item>
-      <el-menu-item index="2">
+      <el-menu-item index="2" disabled>
         <i class="el-icon-menu"></i>
-        <span slot="title">病人信息登记</span>
+        <span slot="title" >每日信息登记</span>
       </el-menu-item>
 
     </div>
@@ -83,6 +93,9 @@
                 case '3':
                   this.$router.replace({path: '/doctor/newReport'})
                   break;
+                case '4':
+                  this.$router.replace({path: '/doctor/news'})
+                  break;
               }
             }else if(this.type==='chief nurse'){
               switch (key) {
@@ -94,6 +107,9 @@
                   break;
                 case '3':
                   this.$router.replace({path: '/chiefNurse/checkWard'})
+                  break;
+                case '4':
+                  this.$router.replace({path: '/chiefNurse/news'})
                   break;
               }
             }else if(this.type==='ward nurse'){

@@ -143,11 +143,7 @@
           chiefNurse:this.$store.state.username,
           nurseName:row.name
         }).then(resp => {
-          if(resp.data === 'success'){
             alert('添加成功！')
-          }else {
-            alert('目前情况不支持添加')
-          }
         })
           .catch(error => {
             console.log(error);

@@ -38,6 +38,18 @@
             label="姓名">
           </el-table-column>
           <el-table-column
+            prop="gender"
+            label="性别">
+            <template slot-scope="scope">
+              <span v-if="scope.row.gender==='male'">男</span>
+              <span v-else-if="scope.row.gender==='female'">女</span>
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="age"
+            label="年龄">
+          </el-table-column>
+          <el-table-column
             prop="level"
             label="病情等级">
             <template slot-scope="scope">
@@ -56,15 +68,20 @@
             </template>
           </el-table-column>
           <el-table-column
+            prop="wardName"
+            label="病房">
+          </el-table-column>
+          <el-table-column
             prop="sickBed"
             label="病床">
           </el-table-column>
           <el-table-column
-            prop="alive"
+            prop="status"
             label="生存状态">
             <template slot-scope="scope">
-              <span v-if="scope.row.alive">正常</span>
-              <span v-else>死亡</span>
+              <span v-if="scope.row.status===1">康复出院</span>
+              <span v-else-if="scope.row.status===0">在院治疗</span>
+              <span v-else-if="scope.row.status===-1">死亡</span>
             </template>
           </el-table-column>
         </el-table>
@@ -82,18 +99,34 @@
          value:[]
         },
         options: [{
-          value: 'discharge',
-          label: '是否满足出院条件',
+          value: 'section',
+          label: '病人所属病区',
           children: [{
-              value: 'true',
-              label: '满足'
-            }, {
-              value: 'false',
-              label: '不满足'
-            }]
+            value: 'mild',
+            label: '轻症区'
+          }, {
+            value: 'severe',
+            label: '重症区'
+          },{
+            value:'critical',
+            label:'危重症区'
+          }]
         },{
-          value: 'trans',
-          label: '是否待转入其他病区',
+          value: 'level',
+          label: '病人病情评级',
+          children: [{
+            value: 'mild',
+            label: '轻症'
+          }, {
+            value: 'severe',
+            label: '重症'
+          },{
+            value:'critical',
+            label:'危重'
+          }]
+        },{
+          value: 'isWaiting',
+          label: '是否在隔离区等待',
           children: [{
             value: 'true',
             label: '是'
@@ -138,6 +171,8 @@
           })
       },
       getPatients(){
+        console.log(this.selectRange.value[0])
+        console.log(this.selectRange.value[1])
         this.$axios.post('/emergencyNurse/select',{
           username:this.$store.state.username,
           type:this.selectRange.value[0],
