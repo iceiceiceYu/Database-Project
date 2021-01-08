@@ -128,7 +128,10 @@
             nurseName:row.name
         }).then(resp => {
           if(resp.data === 'success'){
-            alert('删除成功！')
+            this.$notify({
+              title: '删除成功',
+              type: 'success'
+            });
           }else {
             alert('目前情况不支持删除')
           }
@@ -143,7 +146,10 @@
           chiefNurse:this.$store.state.username,
           nurseName:row.name
         }).then(resp => {
-            alert('添加成功！')
+          this.$notify({
+            title: '添加成功',
+            type: 'success'
+          });
         })
           .catch(error => {
             console.log(error);

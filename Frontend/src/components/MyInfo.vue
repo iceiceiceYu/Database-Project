@@ -89,7 +89,10 @@
               name: this.myInfo.name,
             }).then(resp => {
               if (resp.data === 'success') {
-                alert('修改成功')
+                this.$notify({
+                  title: '修改成功',
+                  type: 'success'
+                });
               } else {
                 alert('修改失败')
               }

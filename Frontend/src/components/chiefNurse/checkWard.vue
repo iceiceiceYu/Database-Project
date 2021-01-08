@@ -10,20 +10,29 @@
       <el-main>
         <h1>病床管理</h1>
         <el-table
-          :data="wardData"
+          :data="wardInfo"
           stripe
-          style="width: 100%">
+          style="width: 100%"
+          height="500">
           <el-table-column
-            prop="wardName"
             label="病房名">
+            <template slot-scope="scope">
+              {{wardInfo[scope.$index]}}
+            </template>
           </el-table-column>
           <el-table-column
-            prop="sickBed"
+            prop="sickBedInfo"
             label="病床">
+            <template slot-scope="scope">
+              {{sickbedInfo[scope.$index]}}
+            </template>
           </el-table-column>
           <el-table-column
-            prop="patient"
+            prop="patientInfo"
             label="患者">
+            <template slot-scope="scope">
+              {{patientInfo[scope.$index]}}
+            </template>
           </el-table-column>
         </el-table>
       </el-main>
@@ -36,23 +45,43 @@
         name: "ChiefNurseCheckWard",
       data(){
           return{
-            wardData:[{
-              wardName:'病房1',
-              sickBed:'1',
-              patient:'zhang'
-            }]
+            wardInfo:[],
+            sickbedInfo:[],
+            patientInfo:[]
           }
       },created(){
-        this.$axios.post('/chiefNurse/getWardInfo',
+        this.$axios.post('/chiefNurse/wardInfo',
           this.$store.state.username
         ).then(resp => {
           console.log(resp.data)
-          this.wardData=resp.data
+          this.wardInfo=resp.data
         })
           .catch(error => {
             console.log(error);
             alert('网络连接失败')
           })
+        this.$axios.post('/chiefNurse/sickbedInfo',
+          this.$store.state.username
+        ).then(resp => {
+          console.log(resp.data)
+          this.sickbedInfo=resp.data
+        })
+          .catch(error => {
+            console.log(error);
+            alert('网络连接失败')
+          })
+        this.$axios.post('/chiefNurse/patientInfo',
+          this.$store.state.username
+        ).then(resp => {
+          console.log(resp.data)
+          this.patientInfo=resp.data
+        })
+          .catch(error => {
+            console.log(error);
+            alert('网络连接失败')
+          })
+
+
       },methods:{
 
       }

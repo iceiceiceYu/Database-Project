@@ -115,7 +115,10 @@
               level: this.report.level,
               date:this.report.date,
             }).then(resp => {
-                alert('添加成功')
+              this.$notify({
+                title: '添加成功',
+                type: 'success'
+              });
             })
               .catch(error => {
                 console.log(error);

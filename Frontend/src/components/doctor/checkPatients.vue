@@ -68,7 +68,7 @@
               <span v-if="scope.row.section==='mild'">轻症区</span>
               <span v-else-if="scope.row.section==='severe'">重症区</span>
               <span v-else-if="scope.row.section==='critical'">危重症区</span>
-                </span>
+              </span>
             </template>
           </el-table-column>
           <el-table-column
@@ -109,7 +109,6 @@
             </template>
           </el-table-column>
         </el-table>
-
       </el-main>
     </el-container>
   </el-container>
@@ -169,6 +168,7 @@
         level: 'mild'
       }
     }, created() {
+      this.section=this.$store.state.section
       this.getAllPatients();
     }, methods: {
       getAllPatients() {
@@ -240,10 +240,14 @@
         this.$axios.post('/doctor/discharge',
           this.selectionPatient.id,
         ).then(resp => {
-          this.$notify({
-            title: '病人已成功出院',
-            type: 'success'
-          });
+          if (resp.data === 'success'){
+            this.$notify({
+              title: '病人已成功出院',
+              type: 'success'
+            });
+        }else {
+            alert('病人目前还不能出院')
+          }
         })
           .catch(error => {
             console.log(error);

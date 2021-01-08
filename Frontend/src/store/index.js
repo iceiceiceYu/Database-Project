@@ -6,7 +6,8 @@ export default new Vuex.Store({
   state: {
     id: localStorage.getItem('id') || null,
     username: localStorage.getItem('username') || null,
-    type:localStorage.getItem('type')||null
+    type:localStorage.getItem('type')||null,
+    section:localStorage.getItem('section')||null
   },
   mutations: {
     login(state, data){

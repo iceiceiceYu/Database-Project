@@ -62,10 +62,10 @@
             prop="section"
             label="所属病区">
             <template slot-scope="scope">
-              <span v-if="scope.row.section==='mild'">轻症区</span>
+              <span v-if="scope.row.status !==0">暂无</span>
+              <span v-else-if="scope.row.section==='mild'">轻症区</span>
               <span v-else-if="scope.row.section==='severe'">重症区</span>
               <span v-else-if="scope.row.section==='critical'">危重症区</span>
-              <span v-else-if="scope.row.section===null">隔离区等待中</span>
             </template>
           </el-table-column>
           <el-table-column
@@ -157,6 +157,7 @@
         this.$axios.post('/chiefNurse/getPatientInfo',
           this.$store.state.username
         ).then(resp => {
+          console.log(resp.data)
           this.tableData=resp.data
         })
           .catch(error => {
