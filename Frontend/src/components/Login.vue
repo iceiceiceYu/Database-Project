@@ -53,9 +53,12 @@
               .then(resp => {
                 console.log(resp.data)
                 if (resp.status === 200 && resp.data!=='') {
-                  alert('登录成功！');
                   this.$store.commit('login', resp.data);
                   this.$router.replace({path: '/dashboard'})
+                  this.$notify({
+                    title: '登录成功',
+                    type: 'success'
+                  });
                 } else {
                   alert('登陆失败！请检查用户名或密码。')
                 }
