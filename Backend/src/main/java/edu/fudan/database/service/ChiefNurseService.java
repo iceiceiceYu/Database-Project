@@ -75,65 +75,11 @@ public class ChiefNurseService {
     private List<Patient> canDischarge(List<Patient> patients) {
         List<Patient> selectedPatients = new ArrayList<>();
         for (Patient patient : patients) {
-            if (testDischarge(patient)) {
+            if (SystemService.testDischarge(patient)) {
                 selectedPatients.add(patient);
             }
         }
         return selectedPatients;
-    }
-
-    private boolean testDischarge(Patient patient) {
-        if (patient.getLevel().equals("mild")) {
-            Long id = patient.getId();
-
-            // 检验核酸检测结果
-            List<Report> reports = (List<Report>) reportRepository.findReportByPatientId(id);
-            int reportSize = reports.size();
-            Report last = reports.get(reportSize - 1);
-            Report nextToLast = reports.get(reportSize - 2);
-
-            Test:
-            if (last.isPositive() || nextToLast.isPositive()) {
-                return false;
-            } else { // 检验两次时间大于24小时
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                try {
-                    Date lastDate = sdf.parse(last.getDate());
-                    Date nextToLastDate = sdf.parse(nextToLast.getDate());
-                    double time = (double) lastDate.getTime() - nextToLastDate.getTime();
-                    if (time / (1000 * 60 * 60) <= 24) {
-                        for (int i = 3; i <= reportSize; i++) {
-                            nextToLast = reports.get(reportSize - i);
-                            if (nextToLast.isPositive()) {
-                                return false;
-                            } else {
-                                nextToLastDate = sdf.parse(nextToLast.getDate());
-                                time = (double) lastDate.getTime() - nextToLastDate.getTime();
-                                if (time / (1000 * 60 * 60) > 24) {
-                                    break Test;
-                                }
-                            }
-                        }
-                        return false;
-                    }
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            // 检验每日记录体温
-            List<DailyInfo> dailyInfos = (List<DailyInfo>) dailyInfoRepository.findDailyInfoByPatientId(id);
-            int infoSize = dailyInfos.size();
-            for (int i = 1; i <= 3; i++) {
-                if (dailyInfos.get(infoSize - i).getTemperature() >= 37.3) {
-                    return false;
-                }
-            }
-
-            return true;
-        } else {
-            return false;
-        }
     }
 
     private List<Patient> canTrans(List<Patient> patients) {
