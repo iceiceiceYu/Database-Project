@@ -11,7 +11,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @SpringBootApplication
@@ -37,35 +39,35 @@ public class DatabaseProjectApplication {
             }
 
             private void SectionLoader(SectionRepository sectionRepository) {
-                Set<String> mWardNurse = new HashSet<>();
+                List<String> mWardNurse = new ArrayList<>();
                 mWardNurse.add("mWard1");
                 mWardNurse.add("mWard2");
                 mWardNurse.add("mWard3");
                 mWardNurse.add("mWard4");
-                Set<String> sWardNurse = new HashSet<>();
+                List<String> sWardNurse = new ArrayList<>();
                 sWardNurse.add("sWard1");
                 sWardNurse.add("sWard2");
                 sWardNurse.add("sWard3");
-                Set<String> cWardNurse = new HashSet<>();
+                List<String> cWardNurse = new ArrayList<>();
                 cWardNurse.add("cWard1");
                 cWardNurse.add("cWard2");
                 cWardNurse.add("cWard3");
 
-                Set<String> mWard = new HashSet<>();
+                List<String> mWard = new ArrayList<>();
                 mWard.add("轻症病房1");
                 mWard.add("轻症病房2");
                 mWard.add("轻症病房3");
                 mWard.add("轻症病房4");
                 mWard.add("轻症病房5");
                 mWard.add("轻症病房6");
-                Set<String> sWard = new HashSet<>();
+                List<String> sWard = new ArrayList<>();
                 sWard.add("重症病房1");
                 sWard.add("重症病房2");
                 sWard.add("重症病房3");
                 sWard.add("重症病房4");
                 sWard.add("重症病房5");
                 sWard.add("重症病房6");
-                Set<String> cWard = new HashSet<>();
+                List<String> cWard = new ArrayList<>();
                 cWard.add("危重症病房1");
                 cWard.add("危重症病房2");
                 cWard.add("危重症病房3");
@@ -82,12 +84,12 @@ public class DatabaseProjectApplication {
             }
 
             private void WardLoader(WardRepository wardRepository) {
-                Set<String> mPatients = new HashSet<>();
+                List<String> mPatients = new ArrayList<>();
                 mPatients.add("张三");
                 mPatients.add("李四");
                 mPatients.add("王五");
                 mPatients.add("赵六");
-                Set<Integer> mSickbeds = new HashSet<>();
+                List<Integer> mSickbeds = new ArrayList<>();
                 mSickbeds.add(1);
                 mSickbeds.add(2);
                 mSickbeds.add(3);
@@ -95,51 +97,51 @@ public class DatabaseProjectApplication {
 
                 Ward mWard1 = new Ward("mild", "轻症病房1", 4, mPatients, mSickbeds);
                 wardRepository.save(mWard1);
-                Ward mWard2 = new Ward("mild", "轻症病房2", 4, new HashSet<>(), new HashSet<>());
+                Ward mWard2 = new Ward("mild", "轻症病房2", 4, new ArrayList<>(), new ArrayList<>());
                 wardRepository.save(mWard2);
-                Ward mWard3 = new Ward("mild", "轻症病房3", 4, new HashSet<>(), new HashSet<>());
+                Ward mWard3 = new Ward("mild", "轻症病房3", 4, new ArrayList<>(), new ArrayList<>());
                 wardRepository.save(mWard3);
-                Ward mWard4 = new Ward("mild", "轻症病房4", 4, new HashSet<>(), new HashSet<>());
+                Ward mWard4 = new Ward("mild", "轻症病房4", 4, new ArrayList<>(), new ArrayList<>());
                 wardRepository.save(mWard4);
-                Ward mWard5 = new Ward("mild", "轻症病房5", 4, new HashSet<>(), new HashSet<>());
+                Ward mWard5 = new Ward("mild", "轻症病房5", 4, new ArrayList<>(), new ArrayList<>());
                 wardRepository.save(mWard5);
-                Ward mWard6 = new Ward("mild", "轻症病房6", 4, new HashSet<>(), new HashSet<>());
+                Ward mWard6 = new Ward("mild", "轻症病房6", 4, new ArrayList<>(), new ArrayList<>());
                 wardRepository.save(mWard6);
 
-                Set<String> sPatients = new HashSet<>();
-                mPatients.add("重一");
-                Set<Integer> sSickbeds = new HashSet<>();
-                mSickbeds.add(1);
+                List<String> sPatients = new ArrayList<>();
+                sPatients.add("重一");
+                List<Integer> sSickbeds = new ArrayList<>();
+                sSickbeds.add(1);
 
                 Ward sWard1 = new Ward("severe", "重症病房1", 2, sPatients, sSickbeds);
                 wardRepository.save(sWard1);
-                Ward sWard2 = new Ward("severe", "重症病房2", 2, new HashSet<>(), new HashSet<>());
+                Ward sWard2 = new Ward("severe", "重症病房2", 2, new ArrayList<>(), new ArrayList<>());
                 wardRepository.save(sWard2);
-                Ward sWard3 = new Ward("severe", "重症病房3", 2, new HashSet<>(), new HashSet<>());
+                Ward sWard3 = new Ward("severe", "重症病房3", 2, new ArrayList<>(), new ArrayList<>());
                 wardRepository.save(sWard3);
-                Ward sWard4 = new Ward("severe", "重症病房4", 2, new HashSet<>(), new HashSet<>());
+                Ward sWard4 = new Ward("severe", "重症病房4", 2, new ArrayList<>(), new ArrayList<>());
                 wardRepository.save(sWard4);
-                Ward sWard5 = new Ward("severe", "重症病房5", 2, new HashSet<>(), new HashSet<>());
+                Ward sWard5 = new Ward("severe", "重症病房5", 2, new ArrayList<>(), new ArrayList<>());
                 wardRepository.save(sWard5);
-                Ward sWard6 = new Ward("severe", "重症病房6", 2, new HashSet<>(), new HashSet<>());
+                Ward sWard6 = new Ward("severe", "重症病房6", 2, new ArrayList<>(), new ArrayList<>());
                 wardRepository.save(sWard6);
 
-                Set<String> cPatients = new HashSet<>();
-                mPatients.add("危重一");
-                Set<Integer> cSickbeds = new HashSet<>();
-                mSickbeds.add(1);
+                List<String> cPatients = new ArrayList<>();
+                cPatients.add("危重一");
+                List<Integer> cSickbeds = new ArrayList<>();
+                cSickbeds.add(1);
 
                 Ward cWard1 = new Ward("severe", "危重症病房1", 1, cPatients, cSickbeds);
                 wardRepository.save(cWard1);
-                Ward cWard2 = new Ward("severe", "危重症病房2", 1, new HashSet<>(), new HashSet<>());
+                Ward cWard2 = new Ward("severe", "危重症病房2", 1, new ArrayList<>(), new ArrayList<>());
                 wardRepository.save(cWard2);
-                Ward cWard3 = new Ward("severe", "危重症病房3", 1, new HashSet<>(), new HashSet<>());
+                Ward cWard3 = new Ward("severe", "危重症病房3", 1, new ArrayList<>(), new ArrayList<>());
                 wardRepository.save(cWard3);
-                Ward cWard4 = new Ward("severe", "危重症病房4", 1, new HashSet<>(), new HashSet<>());
+                Ward cWard4 = new Ward("severe", "危重症病房4", 1, new ArrayList<>(), new ArrayList<>());
                 wardRepository.save(cWard4);
-                Ward cWard5 = new Ward("severe", "危重症病房5", 1, new HashSet<>(), new HashSet<>());
+                Ward cWard5 = new Ward("severe", "危重症病房5", 1, new ArrayList<>(), new ArrayList<>());
                 wardRepository.save(cWard5);
-                Ward cWard6 = new Ward("severe", "危重症病房6", 1, new HashSet<>(), new HashSet<>());
+                Ward cWard6 = new Ward("severe", "危重症病房6", 1, new ArrayList<>(), new ArrayList<>());
                 wardRepository.save(cWard6);
             }
 

@@ -194,7 +194,7 @@ public class ChiefNurseService {
         staffRepository.save(staff);
 
         Section section = sectionRepository.findSectionByChiefNurse(chiefNurseUsername);
-        Set<String> wardNurses = section.getWardNurses();
+        List<String> wardNurses = section.getWardNurses();
         wardNurses.add(wardNurseUsername);
         section.setWardNurses(wardNurses);
         sectionRepository.save(section);
@@ -209,7 +209,7 @@ public class ChiefNurseService {
         List<Patient> patients = (List<Patient>) patientRepository.findPatientBySectionAndStatus(sectionName, 0);
 
         Section section = sectionRepository.findSectionByChiefNurse(chiefNurseUsername);
-        Set<String> wardNurses = section.getWardNurses();
+        List<String> wardNurses = section.getWardNurses();
 
         if (sectionName.equals("mild") && (wardNurses.size() - 1) * 3 < patients.size()) {
             return "fail";
