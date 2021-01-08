@@ -216,7 +216,7 @@ public class DoctorService {
 
             if (patients.contains(name) && sickbeds.contains(sickbed)) {
                 patients.remove(name);
-                sickbeds.remove(sickbed);
+                sickbeds.remove((Integer)sickbed);
                 ward.setPatients(patients);
                 ward.setSickbeds(sickbeds);
                 wardRepository.save(ward);
@@ -252,7 +252,7 @@ public class DoctorService {
 
             if (patients.contains(name) && sickbeds.contains(sickbed)) {
                 patients.remove(name);
-                sickbeds.remove(sickbed);
+                sickbeds.remove((Integer)sickbed);
                 ward.setPatients(patients);
                 ward.setSickbeds(sickbeds);
                 wardRepository.save(ward);
