@@ -217,6 +217,7 @@ public class SystemService {
                     Date nextToLastDate = sdf.parse(nextToLast.getDate());
                     double time = (double) lastDate.getTime() - nextToLastDate.getTime();
                     if (time / (1000 * 60 * 60) <= 24) {
+                        System.out.println(time / (1000 * 60 * 60));
                         for (int i = 3; i <= reportSize; i++) {
                             nextToLast = reports.get(reportSize - i);
                             if (nextToLast.isPositive()) {
