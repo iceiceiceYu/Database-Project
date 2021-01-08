@@ -7,6 +7,7 @@ import edu.fudan.database.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -113,7 +114,7 @@ public class SystemService {
         }
     }
 
-    private static boolean canArrange(String level) {
+    public static boolean canArrange(String level) {
         Section section = sectionRepository.findSectionByLevel(level);
         List<String> wardNurses = section.getWardNurses();
         List<String> wards = section.getWards();
@@ -127,5 +128,58 @@ public class SystemService {
             return patients.size() < wards.size(); // 判断床位是否足够
         }
         return false;
+    }
+
+    public static void transferPatient(Patient patient, boolean cascade) {
+        String name = patient.getName();
+        int sickbed = patient.getSickbed();
+        String sectionName = patient.getSection();
+
+        Section section = sectionRepository.findSectionByLevel(sectionName);
+        List<String> wards = section.getWards();
+
+        for (String wardName : wards) {
+            Ward ward = wardRepository.findWardByName(wardName);
+            List<String> patients = ward.getPatients();
+            List<Integer> sickbeds = ward.getSickbeds();
+
+            if (patients.contains(name) && sickbeds.contains(sickbed)) {
+                patients.remove(name);
+                sickbeds.remove((Integer) sickbed);
+                ward.setPatients(patients);
+                ward.setSickbeds(sickbeds);
+                wardRepository.save(ward);
+                break;
+            }
+        }
+
+        patient.setSickbed(0);
+        patientRepository.save(patient);
+
+        if (cascade) {
+            List<Patient> quarantinedPatients = (List<Patient>) patientRepository.findPatientByLevelAndQuarantined(sectionName, true);
+            if (quarantinedPatients.size() > 0) {
+                SystemService.arrangePatient(quarantinedPatients.get(0));
+            } else {
+                List<Patient> canTransPatients = SystemService.canTransPatient(sectionName);
+                if (canTransPatients.size() > 0) {
+                    SystemService.transferPatient(canTransPatients.get(0), true);
+                }
+            }
+        }
+
+        SystemService.arrangePatient(patient);
+    }
+
+    public static List<Patient> canTransPatient(String section) {
+        List<Patient> patients = (List<Patient>) patientRepository.findPatientByLevelAndStatus(section, 0);
+        List<Patient> selectedPatients = new ArrayList<>();
+
+        for (Patient patient : patients) {
+            if (!patient.getLevel().equals(patient.getSection())) {
+                selectedPatients.add(patient);
+            }
+        }
+        return selectedPatients;
     }
 }
