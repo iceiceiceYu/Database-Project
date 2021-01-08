@@ -191,7 +191,7 @@ public class DoctorService {
     }
 
     public Report addReport(Long patientId, String patientName, boolean positive, String level, String date, String doctor) {
-        Report report = new Report(patientId, patientName, positive, level, date, doctor);
+        Report report = new Report(patientId, patientName, positive, level, date.replace("T", " ").replace(".000Z", ""), doctor);
         reportRepository.save(report);
         if (SystemService.testDischarge(patientRepository.findPatientById(patientId))) {
             String sectionName = staffRepository.findStaffByUsername(doctor).getSection();
