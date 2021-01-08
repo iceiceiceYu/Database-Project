@@ -82,7 +82,18 @@ public class DatabaseProjectApplication {
             }
 
             private void WardLoader(WardRepository wardRepository) {
-                Ward mWard1 = new Ward("mild", "轻症病房1", 4, new HashSet<>(), new HashSet<>());
+                Set<String> mPatients = new HashSet<>();
+                mPatients.add("张三");
+                mPatients.add("李四");
+                mPatients.add("王五");
+                mPatients.add("赵六");
+                Set<Integer> mSickbeds = new HashSet<>();
+                mSickbeds.add(1);
+                mSickbeds.add(2);
+                mSickbeds.add(3);
+                mSickbeds.add(4);
+
+                Ward mWard1 = new Ward("mild", "轻症病房1", 4, mPatients, mSickbeds);
                 wardRepository.save(mWard1);
                 Ward mWard2 = new Ward("mild", "轻症病房2", 4, new HashSet<>(), new HashSet<>());
                 wardRepository.save(mWard2);
@@ -95,7 +106,12 @@ public class DatabaseProjectApplication {
                 Ward mWard6 = new Ward("mild", "轻症病房6", 4, new HashSet<>(), new HashSet<>());
                 wardRepository.save(mWard6);
 
-                Ward sWard1 = new Ward("severe", "重症病房1", 2, new HashSet<>(), new HashSet<>());
+                Set<String> sPatients = new HashSet<>();
+                mPatients.add("重一");
+                Set<Integer> sSickbeds = new HashSet<>();
+                mSickbeds.add(1);
+
+                Ward sWard1 = new Ward("severe", "重症病房1", 2, sPatients, sSickbeds);
                 wardRepository.save(sWard1);
                 Ward sWard2 = new Ward("severe", "重症病房2", 2, new HashSet<>(), new HashSet<>());
                 wardRepository.save(sWard2);
@@ -108,7 +124,12 @@ public class DatabaseProjectApplication {
                 Ward sWard6 = new Ward("severe", "重症病房6", 2, new HashSet<>(), new HashSet<>());
                 wardRepository.save(sWard6);
 
-                Ward cWard1 = new Ward("severe", "危重症病房1", 1, new HashSet<>(), new HashSet<>());
+                Set<String> cPatients = new HashSet<>();
+                mPatients.add("危重一");
+                Set<Integer> cSickbeds = new HashSet<>();
+                mSickbeds.add(1);
+
+                Ward cWard1 = new Ward("severe", "危重症病房1", 1, cPatients, cSickbeds);
                 wardRepository.save(cWard1);
                 Ward cWard2 = new Ward("severe", "危重症病房2", 1, new HashSet<>(), new HashSet<>());
                 wardRepository.save(cWard2);
@@ -209,6 +230,11 @@ public class DatabaseProjectApplication {
                 patientRepository.save(patient3);
                 Patient patient4 = new Patient("赵六", "male", 28, "mild", false, "mild", "mWard2", "轻症病房1", 4, 0);
                 patientRepository.save(patient4);
+
+                Patient patient5 = new Patient("重一", "male", 24, "severe", false, "severe", "sWard1", "重症病房1", 1, 0);
+                patientRepository.save(patient5);
+                Patient patient6 = new Patient("危重一", "male", 30, "critical", false, "critical", "cWard1", "危重症病房1", 1, 0);
+                patientRepository.save(patient6);
             }
         };
     }
