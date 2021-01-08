@@ -12,6 +12,8 @@ public class Ward {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String level; // mild, severe, critical
+
+    @Column(unique = true)
     private String name;
     private int capacity;
 

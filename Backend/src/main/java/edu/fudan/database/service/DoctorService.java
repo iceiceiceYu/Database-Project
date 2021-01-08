@@ -1,5 +1,6 @@
 package edu.fudan.database.service;
 
+import edu.fudan.database.domain.DailyInfo;
 import edu.fudan.database.domain.Patient;
 import edu.fudan.database.domain.Report;
 import edu.fudan.database.domain.Staff;
@@ -7,11 +8,15 @@ import edu.fudan.database.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
 public class DoctorService {
+    private final DailyInfoRepository dailyInfoRepository;
     private final PatientRepository patientRepository;
     private final ReportRepository reportRepository;
     private final SectionRepository sectionRepository;
@@ -19,11 +24,13 @@ public class DoctorService {
     private final WardRepository wardRepository;
 
     @Autowired
-    public DoctorService(PatientRepository patientRepository,
+    public DoctorService(DailyInfoRepository dailyInfoRepository,
+                         PatientRepository patientRepository,
                          ReportRepository reportRepository,
                          SectionRepository sectionRepository,
                          StaffRepository staffRepository,
                          WardRepository wardRepository) {
+        this.dailyInfoRepository = dailyInfoRepository;
         this.patientRepository = patientRepository;
         this.reportRepository = reportRepository;
         this.sectionRepository = sectionRepository;
@@ -68,11 +75,65 @@ public class DoctorService {
     private List<Patient> canDischarge(List<Patient> patients) {
         List<Patient> selectedPatients = new ArrayList<>();
         for (Patient patient : patients) {
-            if (patient.getLevel().equals("mild")) {
-                // TODO
+            if (testDischarge(patient)) {
+                selectedPatients.add(patient);
             }
         }
         return selectedPatients;
+    }
+
+    private boolean testDischarge(Patient patient) {
+        if (patient.getLevel().equals("mild")) {
+            Long id = patient.getId();
+
+            // 检验核酸检测结果
+            List<Report> reports = (List<Report>) reportRepository.findReportByPatientId(id);
+            int reportSize = reports.size();
+            Report last = reports.get(reportSize - 1);
+            Report nextToLast = reports.get(reportSize - 2);
+
+            Test:
+            if (last.isPositive() || nextToLast.isPositive()) {
+                return false;
+            } else { // 检验两次时间大于24小时
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                try {
+                    Date lastDate = sdf.parse(last.getDate());
+                    Date nextToLastDate = sdf.parse(nextToLast.getDate());
+                    double time = (double) lastDate.getTime() - nextToLastDate.getTime();
+                    if (time / (1000 * 60 * 60) <= 24) {
+                        for (int i = 3; i <= reportSize; i++) {
+                            nextToLast = reports.get(reportSize - i);
+                            if (nextToLast.isPositive()) {
+                                return false;
+                            } else {
+                                nextToLastDate = sdf.parse(nextToLast.getDate());
+                                time = (double) lastDate.getTime() - nextToLastDate.getTime();
+                                if (time / (1000 * 60 * 60) > 24) {
+                                    break Test;
+                                }
+                            }
+                        }
+                        return false;
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            // 检验每日记录体温
+            List<DailyInfo> dailyInfos = (List<DailyInfo>) dailyInfoRepository.findDailyInfoByPatientId(id);
+            int infoSize = dailyInfos.size();
+            for (int i = 1; i <= 3; i++) {
+                if (dailyInfos.get(infoSize - i).getTemperature() >= 37.3) {
+                    return false;
+                }
+            }
+
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private List<Patient> canTrans(List<Patient> patients) {
@@ -87,12 +148,11 @@ public class DoctorService {
 
     private List<Patient> isAlive(List<Patient> patients) {
         List<Patient> selectedPatients = new ArrayList<>();
-        // TODO
-//        for (Patient patient : patients) {
-//            if (patient.isAlive()) {
-//                selectedPatients.add(patient);
-//            }
-//        }
+        for (Patient patient : patients) {
+            if (patient.getStatus() == 0 || patient.getStatus() == 1) {
+                selectedPatients.add(patient);
+            }
+        }
         return selectedPatients;
     }
 

@@ -9,6 +9,7 @@ import java.util.List;
 
 @Service
 public class EmergencyNurseService {
+    private final DailyInfoRepository dailyInfoRepository;
     private final PatientRepository patientRepository;
     private final ReportRepository reportRepository;
     private final SectionRepository sectionRepository;
@@ -16,11 +17,13 @@ public class EmergencyNurseService {
     private final WardRepository wardRepository;
 
     @Autowired
-    public EmergencyNurseService(PatientRepository patientRepository,
+    public EmergencyNurseService(DailyInfoRepository dailyInfoRepository,
+                                 PatientRepository patientRepository,
                                  ReportRepository reportRepository,
                                  SectionRepository sectionRepository,
                                  StaffRepository staffRepository,
                                  WardRepository wardRepository) {
+        this.dailyInfoRepository = dailyInfoRepository;
         this.patientRepository = patientRepository;
         this.reportRepository = reportRepository;
         this.sectionRepository = sectionRepository;
