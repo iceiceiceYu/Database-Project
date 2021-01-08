@@ -231,6 +231,7 @@
             type: 'success'
           });
         })
+        location.reload()
           .catch(error => {
             console.log(error);
             alert('网络连接失败')
@@ -245,8 +246,12 @@
               title: '病人已成功出院',
               type: 'success'
             });
+            location.reload()
         }else {
-            alert('病人目前还不能出院')
+            this.$notify({
+              message: '病人目前还不能出院',
+              type: 'warning'
+            });
           }
         })
           .catch(error => {
