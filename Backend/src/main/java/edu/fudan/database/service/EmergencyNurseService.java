@@ -31,7 +31,7 @@ public class EmergencyNurseService {
         this.wardRepository = wardRepository;
     }
 
-    public Patient newPatient(String name, String gender, int age, String level) {
+    public String newPatient(String name, String gender, int age, String level) {
         Patient patient = new Patient(name, gender, age, level);
         return SystemService.arrangePatient(patient);
     }

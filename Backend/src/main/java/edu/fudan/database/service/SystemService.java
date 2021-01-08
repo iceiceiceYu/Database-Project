@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class SystemService {
@@ -41,7 +40,7 @@ public class SystemService {
         SystemService.wardRepository = wardRepository;
     }
 
-    public static Patient arrangePatient(Patient patient) {
+    public static String arrangePatient(Patient patient) {
         String level = patient.getLevel();
         if (canArrange(level)) {
             int nurseCapacity, wardCapacity;
@@ -61,8 +60,8 @@ public class SystemService {
             patient.setStatus(0);
 
             Section section = sectionRepository.findSectionByLevel(level);
-            Set<String> wardNurses = section.getWardNurses();
-            Set<String> wards = section.getWards();
+            List<String> wardNurses = section.getWardNurses();
+            List<String> wards = section.getWards();
             List<Patient> patients = (List<Patient>) patientRepository.findPatientBySectionAndStatus(level, 0);
 
             for (String wardNurse : wardNurses) {
@@ -89,8 +88,8 @@ public class SystemService {
                 if (cnt < wardCapacity) {
                     patient.setWardName(wardName);
                     Ward ward = wardRepository.findWardByName(wardName);
-                    Set<String> currPatients = ward.getPatients();
-                    Set<Integer> sickBeds = ward.getSickbeds();
+                    List<String> currPatients = ward.getPatients();
+                    List<Integer> sickBeds = ward.getSickbeds();
 
                     for (int i = 1; i <= wardCapacity; i++) {
                         if (!sickBeds.contains(i)) {
@@ -103,17 +102,18 @@ public class SystemService {
                 }
             }
             patientRepository.save(patient);
+            return "success";
         } else {
             patient.setQuarantined(true);
             patientRepository.save(patient);
+            return "error";
         }
-        return patient;
     }
 
     private static boolean canArrange(String level) {
         Section section = sectionRepository.findSectionByLevel(level);
-        Set<String> wardNurses = section.getWardNurses();
-        Set<String> wards = section.getWards();
+        List<String> wardNurses = section.getWardNurses();
+        List<String> wards = section.getWards();
         List<Patient> patients = (List<Patient>) patientRepository.findPatientBySectionAndStatus(level, 0);
 
         if (level.equals("mild") && patients.size() < wardNurses.size() * 3) { // 判断病房护士是否足够

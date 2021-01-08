@@ -4,6 +4,7 @@ import jdk.nashorn.internal.objects.annotations.Getter;
 import jdk.nashorn.internal.objects.annotations.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -18,16 +19,16 @@ public class Ward {
     private int capacity;
 
     @ElementCollection
-    private Set<String> patients;
+    private List<String> patients;
 
     @ElementCollection
-    private Set<Integer> sickbeds;
+    private List<Integer> sickbeds;
 
     public Ward() {
 
     }
 
-    public Ward(String level, String name, int capacity, Set<String> patients, Set<Integer> sickbeds) {
+    public Ward(String level, String name, int capacity, List<String> patients, List<Integer> sickbeds) {
         this.level = level;
         this.name = name;
         this.capacity = capacity;
@@ -76,22 +77,22 @@ public class Ward {
     }
 
     @Getter
-    public Set<String> getPatients() {
+    public List<String> getPatients() {
         return patients;
     }
 
     @Setter
-    public void setPatients(Set<String> patients) {
+    public void setPatients(List<String> patients) {
         this.patients = patients;
     }
 
     @Getter
-    public Set<Integer> getSickbeds() {
+    public List<Integer> getSickbeds() {
         return sickbeds;
     }
 
     @Setter
-    public void setSickbeds(Set<Integer> sickBeds) {
+    public void setSickbeds(List<Integer> sickBeds) {
         this.sickbeds = sickBeds;
     }
 }

@@ -24,7 +24,7 @@ public class EmergencyNurseController {
     }
 
     @PostMapping("/emergencyNurse/newPatient")
-    public ResponseEntity<Patient> newPatient(@RequestBody PatientRequest patientRequest) {
+    public ResponseEntity<String> newPatient(@RequestBody PatientRequest patientRequest) {
         return ResponseEntity.ok(emergencyNurseService.newPatient(
                 patientRequest.getName(), patientRequest.getGender(),
                 patientRequest.getAge(), patientRequest.getLevel()));
