@@ -25,8 +25,8 @@ public class WardNurseController {
     }
 
     @PostMapping("/wardNurse/getPatientInfo")
-    public ResponseEntity<List<Patient>> getPatientInfo(@RequestBody String doctorUsername) {
-        return ResponseEntity.ok(wardNurseService.getPatientInfo(doctorUsername));
+    public ResponseEntity<List<Patient>> getPatientInfo(@RequestBody String wardNurseUsername) {
+        return ResponseEntity.ok(wardNurseService.getPatientInfo(wardNurseUsername));
     }
 
     @PostMapping("/wardNurse/select")

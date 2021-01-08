@@ -118,7 +118,7 @@ public class DoctorService {
         String section = doctor.getSection();
 
         List<Staff> staff = (List<Staff>) staffRepository.findStaffBySectionAndType(section, "ward nurse");
-        List<Patient> patients = (List<Patient>) patientRepository.findPatientBySection(section);
+        List<Patient> patients = (List<Patient>) patientRepository.findPatientBySectionAndStatus(section, 0);
 
         List<String> patientsOfNurse = new ArrayList<>();
         for (Staff wardNurse : staff) {

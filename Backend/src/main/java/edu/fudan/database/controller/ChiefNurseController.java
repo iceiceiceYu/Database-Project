@@ -32,7 +32,7 @@ public class ChiefNurseController {
     @PostMapping("/chiefNurse/select")
     public ResponseEntity<List<Patient>> select(@RequestBody SelectRequest selectRequest) {
         return ResponseEntity.ok(chiefNurseService.select(
-                selectRequest.getUsername(), selectRequest.getType(), selectRequest.getType()));
+                selectRequest.getUsername(), selectRequest.getType(), selectRequest.getValue()));
     }
 
     @PostMapping("/chiefNurse/wardNurse")

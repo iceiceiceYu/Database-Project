@@ -39,7 +39,7 @@ public class WardNurseService {
         Staff wardNurse = staffRepository.findStaffByUsername(wardNurseUsername);
         String section = wardNurse.getSection();
 
-        List<Patient> patients = (List<Patient>) patientRepository.findPatientBySectionAndStatus(section,0);
+        List<Patient> patients = (List<Patient>) patientRepository.findPatientBySection(section);
         patients.removeIf(patient -> !patient.getWardNurse().equals(wardNurseUsername));
         return patients;
     }

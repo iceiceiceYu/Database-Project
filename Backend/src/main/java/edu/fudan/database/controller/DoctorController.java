@@ -35,7 +35,6 @@ public class DoctorController {
     public ResponseEntity<List<Patient>> select(@RequestBody SelectRequest selectRequest) {
         return ResponseEntity.ok(doctorService.select(
                 selectRequest.getUsername(), selectRequest.getType(), selectRequest.getValue()));
-
     }
 
     @PostMapping("/doctor/chiefNurse")
