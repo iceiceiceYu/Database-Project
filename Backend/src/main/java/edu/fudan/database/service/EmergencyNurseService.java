@@ -1,7 +1,6 @@
 package edu.fudan.database.service;
 
 import edu.fudan.database.domain.Patient;
-import edu.fudan.database.domain.Staff;
 import edu.fudan.database.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,10 +47,10 @@ public class EmergencyNurseService {
                 selectedPatients = whichLevel(value);
                 break;
             case "isWaiting":
-                selectedPatients = isAlive(value);
+                selectedPatients = isQuarantined(value);
                 break;
             case "live":
-                selectedPatients = isQuarantined(value);
+                selectedPatients = isAlive(value);
                 break;
             default:
                 return (List<Patient>) patientRepository.findPatientByStatus(0);

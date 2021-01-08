@@ -55,14 +55,23 @@ public class DatabaseProjectApplication {
                 mWard.add("轻症病房1");
                 mWard.add("轻症病房2");
                 mWard.add("轻症病房3");
+                mWard.add("轻症病房4");
+                mWard.add("轻症病房5");
+                mWard.add("轻症病房6");
                 Set<String> sWard = new HashSet<>();
                 sWard.add("重症病房1");
                 sWard.add("重症病房2");
                 sWard.add("重症病房3");
+                sWard.add("重症病房4");
+                sWard.add("重症病房5");
+                sWard.add("重症病房6");
                 Set<String> cWard = new HashSet<>();
                 cWard.add("危重症病房1");
                 cWard.add("危重症病房2");
                 cWard.add("危重症病房3");
+                cWard.add("危重症病房4");
+                cWard.add("危重症病房5");
+                cWard.add("危重症病房6");
 
                 Section mildSection = new Section("mild", "mDoctor", "mChief", mWardNurse, mWard);
                 sectionRepository.save(mildSection);
@@ -79,6 +88,12 @@ public class DatabaseProjectApplication {
                 wardRepository.save(mWard2);
                 Ward mWard3 = new Ward("mild", "轻症病房3", 4, new HashSet<>(), new HashSet<>());
                 wardRepository.save(mWard3);
+                Ward mWard4 = new Ward("mild", "轻症病房4", 4, new HashSet<>(), new HashSet<>());
+                wardRepository.save(mWard4);
+                Ward mWard5 = new Ward("mild", "轻症病房5", 4, new HashSet<>(), new HashSet<>());
+                wardRepository.save(mWard5);
+                Ward mWard6 = new Ward("mild", "轻症病房6", 4, new HashSet<>(), new HashSet<>());
+                wardRepository.save(mWard6);
 
                 Ward sWard1 = new Ward("severe", "重症病房1", 2, new HashSet<>(), new HashSet<>());
                 wardRepository.save(sWard1);
@@ -86,6 +101,12 @@ public class DatabaseProjectApplication {
                 wardRepository.save(sWard2);
                 Ward sWard3 = new Ward("severe", "重症病房3", 2, new HashSet<>(), new HashSet<>());
                 wardRepository.save(sWard3);
+                Ward sWard4 = new Ward("severe", "重症病房4", 2, new HashSet<>(), new HashSet<>());
+                wardRepository.save(sWard4);
+                Ward sWard5 = new Ward("severe", "重症病房5", 2, new HashSet<>(), new HashSet<>());
+                wardRepository.save(sWard5);
+                Ward sWard6 = new Ward("severe", "重症病房6", 2, new HashSet<>(), new HashSet<>());
+                wardRepository.save(sWard6);
 
                 Ward cWard1 = new Ward("severe", "危重症病房1", 1, new HashSet<>(), new HashSet<>());
                 wardRepository.save(cWard1);
@@ -93,6 +114,12 @@ public class DatabaseProjectApplication {
                 wardRepository.save(cWard2);
                 Ward cWard3 = new Ward("severe", "危重症病房3", 1, new HashSet<>(), new HashSet<>());
                 wardRepository.save(cWard3);
+                Ward cWard4 = new Ward("severe", "危重症病房4", 1, new HashSet<>(), new HashSet<>());
+                wardRepository.save(cWard4);
+                Ward cWard5 = new Ward("severe", "危重症病房5", 1, new HashSet<>(), new HashSet<>());
+                wardRepository.save(cWard5);
+                Ward cWard6 = new Ward("severe", "危重症病房6", 1, new HashSet<>(), new HashSet<>());
+                wardRepository.save(cWard6);
             }
 
             private void StaffLoader(StaffRepository staffRepository) {
