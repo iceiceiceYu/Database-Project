@@ -86,6 +86,9 @@ public class DoctorService {
             // 检验核酸检测结果
             List<Report> reports = (List<Report>) reportRepository.findReportByPatientId(id);
             int reportSize = reports.size();
+            if (reportSize <= 2) {
+                return false;
+            }
             Report last = reports.get(reportSize - 1);
             Report nextToLast = reports.get(reportSize - 2);
 
@@ -121,6 +124,9 @@ public class DoctorService {
             // 检验每日记录体温
             List<DailyInfo> dailyInfos = (List<DailyInfo>) dailyInfoRepository.findDailyInfoByPatientId(id);
             int infoSize = dailyInfos.size();
+            if (infoSize <= 3) {
+                return false;
+            }
             for (int i = 1; i <= 3; i++) {
                 if (dailyInfos.get(infoSize - i).getTemperature() >= 37.3) {
                     return false;
@@ -220,7 +226,7 @@ public class DoctorService {
 
             if (patients.contains(name) && sickbeds.contains(sickbed)) {
                 patients.remove(name);
-                sickbeds.remove((Integer)sickbed);
+                sickbeds.remove((Integer) sickbed);
                 ward.setPatients(patients);
                 ward.setSickbeds(sickbeds);
                 wardRepository.save(ward);
@@ -250,43 +256,47 @@ public class DoctorService {
         return report;
     }
 
-    public Patient discharge(Long patientId) {
+    public String discharge(Long patientId) {
         Patient patient = patientRepository.findPatientById(patientId);
-        String name = patient.getName();
-        int sickbed = patient.getSickbed();
-        String sectionName = patient.getSection();
+        if (testDischarge(patient)) {
+            String name = patient.getName();
+            int sickbed = patient.getSickbed();
+            String sectionName = patient.getSection();
 
-        Section section = sectionRepository.findSectionByLevel(sectionName);
-        List<String> wards = section.getWards();
+            Section section = sectionRepository.findSectionByLevel(sectionName);
+            List<String> wards = section.getWards();
 
-        for (String wardName : wards) {
-            Ward ward = wardRepository.findWardByName(wardName);
-            List<String> patients = ward.getPatients();
-            List<Integer> sickbeds = ward.getSickbeds();
+            for (String wardName : wards) {
+                Ward ward = wardRepository.findWardByName(wardName);
+                List<String> patients = ward.getPatients();
+                List<Integer> sickbeds = ward.getSickbeds();
 
-            if (patients.contains(name) && sickbeds.contains(sickbed)) {
-                patients.remove(name);
-                sickbeds.remove((Integer)sickbed);
-                ward.setPatients(patients);
-                ward.setSickbeds(sickbeds);
-                wardRepository.save(ward);
-                break;
+                if (patients.contains(name) && sickbeds.contains(sickbed)) {
+                    patients.remove(name);
+                    sickbeds.remove((Integer) sickbed);
+                    ward.setPatients(patients);
+                    ward.setSickbeds(sickbeds);
+                    wardRepository.save(ward);
+                    break;
+                }
             }
-        }
 
-        patient.setStatus(1);
-        patient.setSickbed(0);
-        patientRepository.save(patient);
+            patient.setStatus(1);
+            patient.setSickbed(0);
+            patientRepository.save(patient);
 
-        List<Patient> quarantinedPatients = (List<Patient>) patientRepository.findPatientByLevelAndQuarantined(sectionName, true);
-        if (quarantinedPatients.size() > 0) {
-            SystemService.arrangePatient(quarantinedPatients.get(0));
+            List<Patient> quarantinedPatients = (List<Patient>) patientRepository.findPatientByLevelAndQuarantined(sectionName, true);
+            if (quarantinedPatients.size() > 0) {
+                SystemService.arrangePatient(quarantinedPatients.get(0));
+            } else {
+                List<Patient> canTransPatients = SystemService.canTransPatient(sectionName);
+                if (canTransPatients.size() > 0) {
+                    SystemService.transferPatient(canTransPatients.get(0), true);
+                }
+            }
+            return "success";
         } else {
-            List<Patient> canTransPatients = SystemService.canTransPatient(sectionName);
-            if (canTransPatients.size() > 0) {
-                SystemService.transferPatient(canTransPatients.get(0), true);
-            }
+            return "error";
         }
-        return patient;
     }
 }
