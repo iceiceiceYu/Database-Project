@@ -16,7 +16,7 @@
             <el-form-item label="所属病区">
               <el-radio-group v-model="myInfo.section" size="small" disabled>
                 <el-radio-button label="mild">轻症区</el-radio-button>
-                <el-radio-button label="sever">重症区</el-radio-button>
+                <el-radio-button label="severe">重症区</el-radio-button>
                 <el-radio-button label="critical">危重症区</el-radio-button>
               </el-radio-group>
             </el-form-item>

@@ -24,7 +24,7 @@
           <el-form-item label="病情等级">
             <el-radio-group v-model="newPatient.level" size="small">
               <el-radio-button label="mild">轻症</el-radio-button>
-              <el-radio-button label="sever">重症</el-radio-button>
+              <el-radio-button label="severe">重症</el-radio-button>
               <el-radio-button label="critical">危重症</el-radio-button>
             </el-radio-group>
           </el-form-item>

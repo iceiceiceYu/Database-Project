@@ -77,7 +77,7 @@
           width="100">
           </el-table-column>
           <el-table-column
-            prop="sickBed"
+            prop="sickbed"
             label="病床">
             <template slot-scope="scope">
               <span v-if="scope.row.status !==0">暂无</span>
