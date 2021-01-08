@@ -61,4 +61,19 @@ public class ChiefNurseController {
     public ResponseEntity<List<Staff>> searchBackupWard(@RequestBody String chiefNurseUsername) {
         return ResponseEntity.ok(chiefNurseService.searchBackupWard(chiefNurseUsername));
     }
+
+    @PostMapping("/chiefNurse/wardInfo")
+    public ResponseEntity<List<String>> wardInfo(@RequestBody String chiefNurseUsername) {
+        return ResponseEntity.ok(chiefNurseService.wardInfo(chiefNurseUsername));
+    }
+
+    @PostMapping("/chiefNurse/sickbedInfo")
+    public ResponseEntity<List<String>> sickbedInfo(@RequestBody String chiefNurseUsername) {
+        return ResponseEntity.ok(chiefNurseService.sickbedInfo(chiefNurseUsername));
+    }
+
+    @PostMapping("/chiefNurse/patientInfo")
+    public ResponseEntity<List<String>> patientInfo(@RequestBody String chiefNurseUsername) {
+        return ResponseEntity.ok(chiefNurseService.patientInfo(chiefNurseUsername));
+    }
 }

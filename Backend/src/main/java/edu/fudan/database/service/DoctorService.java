@@ -1,9 +1,6 @@
 package edu.fudan.database.service;
 
-import edu.fudan.database.domain.DailyInfo;
-import edu.fudan.database.domain.Patient;
-import edu.fudan.database.domain.Report;
-import edu.fudan.database.domain.Staff;
+import edu.fudan.database.domain.*;
 import edu.fudan.database.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -205,7 +202,30 @@ public class DoctorService {
 
     public Patient modifyAlive(Long patientId) {
         Patient patient = patientRepository.findPatientById(patientId);
+        String name = patient.getName();
+        int sickbed = patient.getSickbed();
+        String sectionName = patient.getSection();
+
+        Section section = sectionRepository.findSectionByLevel(sectionName);
+        List<String> wards = section.getWards();
+
+        for (String wardName : wards) {
+            Ward ward = wardRepository.findWardByName(wardName);
+            List<String> patients = ward.getPatients();
+            List<Integer> sickbeds = ward.getSickbeds();
+
+            if (patients.contains(name) && sickbeds.contains(sickbed)) {
+                patients.remove(name);
+                sickbeds.remove(sickbed);
+                ward.setPatients(patients);
+                ward.setSickbeds(sickbeds);
+                wardRepository.save(ward);
+                break;
+            }
+        }
+
         patient.setStatus(-1);
+        patient.setSickbed(0);
         patientRepository.save(patient);
         return patient;
     }
@@ -218,7 +238,30 @@ public class DoctorService {
 
     public Patient discharge(Long patientId) {
         Patient patient = patientRepository.findPatientById(patientId);
+        String name = patient.getName();
+        int sickbed = patient.getSickbed();
+        String sectionName = patient.getSection();
+
+        Section section = sectionRepository.findSectionByLevel(sectionName);
+        List<String> wards = section.getWards();
+
+        for (String wardName : wards) {
+            Ward ward = wardRepository.findWardByName(wardName);
+            List<String> patients = ward.getPatients();
+            List<Integer> sickbeds = ward.getSickbeds();
+
+            if (patients.contains(name) && sickbeds.contains(sickbed)) {
+                patients.remove(name);
+                sickbeds.remove(sickbed);
+                ward.setPatients(patients);
+                ward.setSickbeds(sickbeds);
+                wardRepository.save(ward);
+                break;
+            }
+        }
+
         patient.setStatus(1);
+        patient.setSickbed(0);
         patientRepository.save(patient);
         return patient;
     }

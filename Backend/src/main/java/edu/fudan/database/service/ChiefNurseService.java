@@ -10,7 +10,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class ChiefNurseService {
@@ -233,5 +232,64 @@ public class ChiefNurseService {
 
     public List<Staff> searchBackupWard(String chiefNurseUsername) {
         return (List<Staff>) staffRepository.findStaffBySectionAndType("backup", "ward nurse");
+    }
+
+    public List<String> wardInfo(String chiefNurseUsername) {
+        List<String> wardInfo = new ArrayList<>();
+        Section section = sectionRepository.findSectionByChiefNurse(chiefNurseUsername);
+        List<String> wards = section.getWards();
+        int wardCapacity = getWardCapacity(section.getLevel());
+
+        for (String ward : wards) {
+            for (int i = 1; i <= wardCapacity; i++) {
+                wardInfo.add(ward);
+            }
+        }
+        return wardInfo;
+    }
+
+    public List<String> sickbedInfo(String chiefNurseUsername) {
+        List<String> sickbedInfo = new ArrayList<>();
+        Section section = sectionRepository.findSectionByChiefNurse(chiefNurseUsername);
+        List<String> wards = section.getWards();
+        int wardCapacity = getWardCapacity(section.getLevel());
+
+        for (String ward : wards) {
+            for (int i = 1; i <= wardCapacity; i++) {
+                sickbedInfo.add("病床" + i);
+            }
+        }
+        return sickbedInfo;
+    }
+
+    public List<String> patientInfo(String chiefNurseUsername) {
+        List<String> patientInfo = new ArrayList<>();
+        Section section = sectionRepository.findSectionByChiefNurse(chiefNurseUsername);
+        List<String> wards = section.getWards();
+        int wardCapacity = getWardCapacity(section.getLevel());
+
+        for (String wardName : wards) {
+            Ward ward = wardRepository.findWardByName(wardName);
+            List<String> patients = ward.getPatients();
+            List<Integer> sickbeds = ward.getSickbeds();
+            for (int i = 1; i <= wardCapacity; i++) {
+                if (sickbeds.contains(i)) {
+                    patientInfo.add(patients.get(sickbeds.indexOf(i)));
+                } else {
+                    patientInfo.add("空置");
+                }
+            }
+        }
+        return patientInfo;
+    }
+
+    private int getWardCapacity(String level) {
+        if (level.equals("mild")) {
+            return 4;
+        } else if (level.equals("severe")) {
+            return 2;
+        } else {
+            return 1;
+        }
     }
 }

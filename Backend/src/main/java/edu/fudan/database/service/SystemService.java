@@ -93,8 +93,11 @@ public class SystemService {
 
                     for (int i = 1; i <= wardCapacity; i++) {
                         if (!sickBeds.contains(i)) {
-                            sickBeds.add(i);
                             currPatients.add(patient.getName());
+                            sickBeds.add(i);
+                            ward.setPatients(currPatients);
+                            ward.setSickbeds(sickBeds);
+                            wardRepository.save(ward);
                             patient.setSickbed(i);
                             break Loop;
                         }
