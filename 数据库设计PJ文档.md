@@ -197,19 +197,19 @@ select * from patient where level != section;
 select * from patient where status = 1;
 ```
 
-更改病人病情评级
+医生更改病人病情评级
 
 ```sql
 update patient set level = 'mild' where id = 10;
 ```
 
-更改病人生存状态
+医生更改病人生存状态
 
 ```sql
 update patient set satus = -1 where id = 10;
 ```
 
-病人出院
+医生允许病人出院
 
 ```sql
 update patient set satus = 1 where id = 10;
@@ -221,6 +221,13 @@ update patient set satus = 1 where id = 10;
 select s.*
 from staff natural join (staff as s) on section
 where staff.type='doctor' and staff.username='mDoctor' and s.type='ward nurse';
+```
+
+医生新增核酸检测单
+
+```sql
+insert into report(date,doctor,level,patient_id,patient_name,positive)
+values('2020-01-02','mDoctor','mild',20,'张三'，1)
 ```
 
 寻找空闲的护士
@@ -245,5 +252,11 @@ insert into daily_info( date,patient_id,patient_name,positive,symptom,temperatur
 
 ```sql
 insert into patient(age,gender,level,namequarantined,section,sickbed    status,ward_name,ward_nurse) values(20,'female','mild',1,'mild',null,1,null,null);
+```
+
+获取新消息
+
+```sql
+select * from message where staff = 'mDoctor';
 ```
 
