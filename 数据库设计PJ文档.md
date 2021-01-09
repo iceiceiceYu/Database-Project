@@ -176,3 +176,74 @@ create index
 
 ## 核心功能的SQL语句说明
 
+根据医生用户名获取管理的病人信息
+
+```sql
+select patient.*
+from patient natural join staff on section
+where staff.username = 'mDoctor' and staff.type = 'doctor';
+```
+
+根据相应删选条件选择病人
+
+```sql
+/*处于轻症区*/
+select * from patient where section = 'mild';
+/*正在隔离区等待*/
+select * from patient where section = NULL and wardName = NULL;
+/*等待转入其他病房*/
+select * from patient where level != section;
+/*已经康复的病人*/
+select * from patient where status = 1;
+```
+
+更改病人病情评级
+
+```sql
+update patient set level = 'mild' where id = 10;
+```
+
+更改病人生存状态
+
+```sql
+update patient set satus = -1 where id = 10;
+```
+
+病人出院
+
+```sql
+update patient set satus = 1 where id = 10;
+```
+
+根据医生用户名获取病区内病房护士信息
+
+```sql
+select s.*
+from staff natural join (staff as s) on section
+where staff.type='doctor' and staff.username='mDoctor' and s.type='ward nurse';
+```
+
+寻找空闲的护士
+
+```sql
+select * from staff where type='nurse' and section = NULL;
+```
+
+护士长新增护士
+
+```sql
+update staff set section = 'mild' where id = 5;
+```
+
+护士每日信息登记
+
+```sql
+insert into daily_info( date,patient_id,patient_name,positive,symptom,temperature,ward_nurse) values(2020-01-01,10,'张三',1,'发烧','38.1','mWard1');
+```
+
+急诊护士新增病人
+
+```sql
+insert into patient(age,gender,level,namequarantined,section,sickbed    status,ward_name,ward_nurse) values(20,'female','mild',1,'mild',null,1,null,null);
+```
+
