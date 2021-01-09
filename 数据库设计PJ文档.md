@@ -176,6 +176,18 @@ create index
 
 ## 核心功能的SQL语句说明
 
+修改自己的账户信息
+
+```sql
+update staff set birth = '1990-01-01' and name='newName' where usename = 'mDoctor'
+```
+
+验证账户密码（为空则错误）
+
+```sql
+select * from staff where username='mDoctor' and password = '123456'
+```
+
 根据医生用户名获取管理的病人信息
 
 ```sql
@@ -187,13 +199,13 @@ where staff.username = 'mDoctor' and staff.type = 'doctor';
 根据相应删选条件选择病人
 
 ```sql
-/*处于轻症区*/
+--处于轻症区--
 select * from patient where section = 'mild';
-/*正在隔离区等待*/
+--正在隔离区等待--
 select * from patient where section = NULL and wardName = NULL;
-/*等待转入其他病房*/
+--等待转入其他病房--
 select * from patient where level != section;
-/*已经康复的病人*/
+--已经康复的病人--
 select * from patient where status = 1;
 ```
 
