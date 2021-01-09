@@ -168,12 +168,6 @@ create table message
 );
 ```
 
-## 索引定义说明
-
-create index 
-
-// TODO
-
 ## 核心功能的SQL语句说明
 
 修改自己的账户信息
